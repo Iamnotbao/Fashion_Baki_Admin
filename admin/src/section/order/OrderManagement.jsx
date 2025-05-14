@@ -5,7 +5,7 @@ import { getAllOrder,getOrderById,changeOrderStatus } from "../../component/serv
 import OrderDetail from "../../component/order/OrderDetails";
 
 
-const OrderManagemet = () => {
+const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState({});
   const [loading, setLoading] = useState(false);
@@ -145,4 +145,4 @@ const OrderManagemet = () => {
 
   )
 }
-export default OrderManagemet;
+export default OrderManagement;

@@ -41,7 +41,7 @@ export const addStock = (stock) => {
 
 export const editStock = async(id,quantity) => {
     try {
-        const response = await axios.patch(`${API_URL}/${id}/quantity/${quantity}`,{
+        const response = await axios.patch(`${API_URL}/${id}/quantity/${quantity}`,{},{
             headers: {
                 'Content-Type': 'application/json',
             },

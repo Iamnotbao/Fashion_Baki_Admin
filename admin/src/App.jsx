@@ -13,10 +13,10 @@ import StaffManagement from "./section/staff/StaffManagement";
 import Profile from "./section/profile/Profile";
 import { AuthProvider } from "./pages/authentication/AuthProvider.jsx";
 import UserDisableManagement from "./section/disableUser/UserDisableManagement.jsx";
-import OrderManagemet from "./section/order/OrderManagement.jsx";
 import StockManagement from "./section/stock/StockManagement.jsx";
 import ReviewManagement from "./section/review/ReviewManagement.jsx";
 import DiscountManagement from "./section/discount/DiscountManagement.jsx";
+import OrderManagement from "./section/order/OrderManagement.jsx";
 
 
 
@@ -44,7 +44,7 @@ const App = () => (
       <Route index element={<HomeDashBoard />} />
       <Route path="disable" element={<UserDisableManagement/>}/>
       <Route path="user" element={<UserManagement />} />
-      <Route path="order" element={<OrderManagemet />} />
+      <Route path="order" element={<OrderManagement />} />
       <Route path="staff" element={<StaffManagement />} />
       <Route path="product" element={<ProductManagement />} />
       <Route path="stock" element={< StockManagement/>} />

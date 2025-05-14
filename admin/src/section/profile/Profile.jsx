@@ -12,7 +12,7 @@ const Profile = () => {
   const [activePopup, setActivePopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
-  const baseURL = import.meta.env.VITE_API_URL+"/admin/profile";
+  const baseURL = import.meta.env.VITE_API_URL + "/admin/profile";
   const url = import.meta.env.VITE_API_URL;
 
   console.log("newProfile", userProfile);
@@ -21,7 +21,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(baseURL,{
+          headers: {
+            'Content-Type': 'application/json',
+          }, withCredentials: true  
+        });
         console.log("user", response.data);
         if (response.data) {
           setUserProfile(response.data);
@@ -39,7 +43,7 @@ const Profile = () => {
     event.preventDefault();
     const newUpdate = {
       ...userProfile,
-      fullName:event.target.fullName.value,
+      fullName: event.target.fullName.value,
       username: event.target.username.value,
       email: event.target.email.value,
       phone: event.target.phone.value,
@@ -48,7 +52,11 @@ const Profile = () => {
     console.log("check neww", newUpdate);
 
     try {
-      const response = await axios.put(baseURL, newUpdate);
+      const response = await axios.put(baseURL, newUpdate, {
+        headers: {
+          'Content-Type': 'application/json',
+        }, withCredentials: true
+      });
       console.log("user", response.data);
       if (response.data) {
         handleClose();
@@ -69,7 +77,11 @@ const Profile = () => {
       try {
         const response = await axios.put(
           `${url}/admin/upload`,
-          formData
+          formData,{
+            headers: {
+              'Content-Type': 'multipart/form-data',  
+          },withCredentials: true
+        }
         );
         console.log(response.data);
         if (response.data) {
@@ -144,7 +156,7 @@ const Profile = () => {
               disabled
             />
           </div>
-        
+
           <div>
             <FormLabel sx={{ mt: 2 }}>Email</FormLabel>
             <TextField
@@ -164,7 +176,7 @@ const Profile = () => {
               defaultValue={userProfile.fullName}
               name="fullName"
               size="small"
-             
+
             />
           </div>
           <div>
@@ -263,7 +275,7 @@ const Profile = () => {
               <div class="card-body">
                 {userProfile ? (
                   <form class="form-horizontal form-material">
-                     <div class="form-group mb-4">
+                    <div class="form-group mb-4">
                       <label class="col-md-12 p-0">Full Name</label>
                       <div class="col-md-12 border-bottom p-0">
                         <input

@@ -20,7 +20,12 @@ const Login = () => {
     console.log(data);
 
     try {
-      const response = await axios.post(baseURL, data);
+      const response = await axios.post(baseURL, data,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },withCredentials: true
+      });
       console.log(response.data);
 
       localStorage.setItem("username", response.data.username);

@@ -29,7 +29,12 @@ const StaffManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${baseURL}/`);
+      const response = await axios.get(`${baseURL}/`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,  
+      });
       console.log("check", response.data);
       if (response.data) {
         setIsLoading(false);
@@ -41,7 +46,12 @@ const StaffManagement = () => {
   const openDetailModal = async () => {
     setDetailModal(true);
     try {
-      const response = await axios.get(`${baseURL}/${selectedStaff.id}`);
+      const response = await axios.get(`${baseURL}/${selectedStaff.id}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       console.log("Here", response.data);
     } catch (error) {
       console.error("Error fetching staff data:", error);
@@ -81,7 +91,8 @@ const StaffManagement = () => {
     console.log("new staff", newstaff);
 
     try {
-      const response = await axios.post(baseURL, newstaff);
+      const response = await axios.post(baseURL, newstaff,{headers: {
+        "Content-Type": "application/json"},withCredentials: true,});
       if (response.data) {
         closeAddModal();
         toast.success("Add staff successfully!!!");
@@ -122,7 +133,9 @@ const StaffManagement = () => {
     try {
       const response = await axios.put(
         `${baseURL}/${selectedStaff.id}`,
-        updatestaff
+        updatestaff,{headers: {
+          "Content-Type": "application/json",
+        },withCredentials: true,}
       );
       console.log("check update", response.data);
       setStaffs(
@@ -154,7 +167,11 @@ const StaffManagement = () => {
   const handleDeletestaff = async () => {
     try {
       const response = await axios.delete(
-        `${baseURL}/fire/${selectedStaff.id}`
+        `${baseURL}/fire/${selectedStaff.id}`,{
+          headers: {
+            "Content-Type": "application/json",
+        },withCredentials: true,
+      }
       );
      
 

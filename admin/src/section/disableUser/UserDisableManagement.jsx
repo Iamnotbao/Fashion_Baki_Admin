@@ -15,11 +15,15 @@ const UserDisableManagement = () => {
   const [showDetailModal, setDetailModal] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [listUser, setListUser] = useState([]);
-  const[isLoading,setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   console.log(selectedUser);
   console.log("list", listUser);
 
+<<<<<<< HEAD
   const baseURL = import.meta.env.VITE_API_URL+"/users/disableUsers";
+=======
+  const baseURL = import.meta.env.VITE_API_URL + "/users/disableUsers";
+>>>>>>> 50917004cf4e1bfb1eae4c739b449eea57a73668
   const url = import.meta.env.VITE_API_URL;
 
   const handleSubSort = (sortedArray) => {
@@ -38,7 +42,11 @@ const UserDisableManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(baseURL);
+      const response = await axios.get(baseURL, {
+        headers: {
+          "Content-Type": "application/json"
+        }, withCredentials: true
+      });
       console.log("check", response.data);
       setUsers(response.data);
       setLoading(false);
@@ -64,7 +72,12 @@ const UserDisableManagement = () => {
   const openDetailModal = async () => {
     setDetailModal(true);
     try {
-      const response = await axios.get(`${url}/user/${selectedUser.id}`);
+      const response = await axios.get(`${url}/user/${selectedUser.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       console.log("Here", response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -102,7 +115,12 @@ const UserDisableManagement = () => {
       address: e.target.address.value,
     };
     try {
-      const response = await axios.post(`${url}/users/register`, newEmployee);
+      const response = await axios.post(`${url}/users/register`, newEmployee, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       if (response.data) {
         toast.success("User is added successfully!");
       }
@@ -128,7 +146,11 @@ const UserDisableManagement = () => {
 
     try {
       const response = await axios.put(
-        `${url}/users/${selectedUser.id}`,
+        `${url}/users/${selectedUser.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        }, withCredentials: true
+      },
         updateEmployee
       );
       if (response.data) {
@@ -139,15 +161,15 @@ const UserDisableManagement = () => {
         users.map((emp) =>
           emp.id === selectedUser.id
             ? {
-                ...selectedUser,
-                ...{
-                  username: e.target.username.value,
-                  password: e.target.password.value,
-                  email: e.target.email.value,
-                  phone: e.target.phone.value,
-                  address: e.target.address.value,
-                },
-              }
+              ...selectedUser,
+              ...{
+                username: e.target.username.value,
+                password: e.target.password.value,
+                email: e.target.email.value,
+                phone: e.target.phone.value,
+                address: e.target.address.value,
+              },
+            }
             : emp
         )
       );
@@ -161,7 +183,11 @@ const UserDisableManagement = () => {
     try {
       const response = await axios.put(
         `${url}/users/enable/${selectedUser.id}`,
-        {}
+        {}, {
+        headers: {
+          "Content-Type": "application/json",
+        }, withCredentials: true
+      }
       );
       if (response.data) {
         toast.success("User is enabled successfully!");
@@ -176,11 +202,11 @@ const UserDisableManagement = () => {
   const handleDeleteEmployee = async () => {
     try {
       const response = await axios.delete(
-        `${url}/users/${selectedUser.id}`,{
-          withCredentials: true, 
-          headers: {
-            "Content-Type":"application/json" 
-          },}
+        `${url}/users/${selectedUser.id}`, {
+        headers: {
+          "Content-Type": "application/json"
+        }, withCredentials: true
+      }
       );
       if (response.data) {
         toast.success("User is deleted successfully!");
@@ -273,7 +299,7 @@ const UserDisableManagement = () => {
                 </div>
                 <div className="modal-body">
                   <form onSubmit={handleAddEmployee}>
-                  <div className="form-group">
+                    <div className="form-group">
                       <label htmlFor="fullName">Full Name</label>
                       <input
                         type="text"
@@ -511,24 +537,24 @@ const UserDisableManagement = () => {
           </div>
         )}
         {showDeleteModal && (
-            <Delete
+          <Delete
             closeDeleteModal={closeDeleteModal}
             selectedProduct={selectedUser}
             handleDeleteproduct={handleDeleteEmployee}
             table={"user"}
           />
         )}
-          {showEnableModal && (
-           <Delete
-           closeDeleteModal={closeEnableModal}
-           selectedProduct={selectedUser}
-           handleDeleteproduct={handleEnableEmployee}
-           table={"user"}
-           action={"enable"}
-         />
+        {showEnableModal && (
+          <Delete
+            closeDeleteModal={closeEnableModal}
+            selectedProduct={selectedUser}
+            handleDeleteproduct={handleEnableEmployee}
+            table={"user"}
+            action={"enable"}
+          />
         )}
       </div>
-      
+
     </>
   );
 };

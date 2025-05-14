@@ -10,6 +10,7 @@ export const getAllOrder =async()=>{
             'Content-Type': 'application/json',
         },withCredentials: true
     });
+    
     return response.data;
 }
 export const getOrderById =async(id)=>{
