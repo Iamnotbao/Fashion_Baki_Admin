@@ -10,7 +10,6 @@ export const getAllOrder =async()=>{
             'Content-Type': 'application/json',
         },withCredentials: true
     });
-    console.log("orders",response.data);
     
     return response.data;
 }
