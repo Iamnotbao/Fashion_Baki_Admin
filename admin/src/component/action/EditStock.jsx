@@ -4,7 +4,7 @@ import { editStock } from "../services/stockServices";
 import { useState } from "react";
 
 const EditStock = ({ handleEdit, open, selectedStock,setLoading,setUpdate }) => {
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     console.log("watch",selectedStock);
     const hanldeEditStock = async() => {
         console.log("edit stock", selectedStock, quantity);
@@ -40,6 +40,8 @@ const EditStock = ({ handleEdit, open, selectedStock,setLoading,setUpdate }) => 
                                 id="outlined-suffix-shrink"
                                 label="Quantity"
                                 variant="outlined"
+                                type="number"
+                                value={quantity}
                                 onChange={(e) => setQuantity(e.target.value)}
                             />
                         </Box>
