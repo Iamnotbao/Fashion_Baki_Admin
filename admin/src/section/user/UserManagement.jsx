@@ -18,7 +18,8 @@ const UserManagement = () => {
   console.log(selectedUser);
   console.log("list", listUser);
 
-  const baseURL = "/api/users/activeUsers";
+  const baseURL = import.meta.env.VITE_API_URL+"/users/activeUsers";
+  const url = import.meta.env.VITE_API_URL;
 
   const handleSubSort = (sortedArray) => {
     setUsers(sortedArray);
@@ -64,7 +65,7 @@ const UserManagement = () => {
   const openDetailModal = async () => {
     setDetailModal(true);
     try {
-      const response = await axios.get(`/api/user/${selectedUser.id}`);
+      const response = await axios.get(`${url}/user/${selectedUser.id}`);
       console.log("Here", response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -100,7 +101,7 @@ const UserManagement = () => {
       fullName: e.target.fullName.value
     };
     try {
-      const response = await axios.post("/api/users/register", newEmployee);
+      const response = await axios.post(`${url}/users/register`, newEmployee);
       if (response.data) {
         console.log("user okok", response.data);
 
@@ -135,7 +136,7 @@ const UserManagement = () => {
 
     try {
       const response = await axios.put(
-        `/api/users/${selectedUser.id}`,
+        `${url}/users/${selectedUser.id}`,
         updateEmployee
       );
       if (response.data) {
@@ -168,7 +169,7 @@ const UserManagement = () => {
   const handleDeleteEmployee = async () => {
     try {
       const response = await axios.put(
-        `/api/users/disable/${selectedUser.id}`,
+        `${url}/users/disable/${selectedUser.id}`,
         {}
       );
       if (response.data) {

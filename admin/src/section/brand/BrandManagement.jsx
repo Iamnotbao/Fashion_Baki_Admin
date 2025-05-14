@@ -16,6 +16,7 @@ const BrandManagement = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [listUser, setListUser] = useState([]);
   const [file, setFile] = useState(null);
+  const url = import.meta.env.VITE_API_URL;
   console.log("opoppo", selectedBrand);
   let formData = new FormData();
 
@@ -58,7 +59,7 @@ const BrandManagement = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/api/service/brands");
+      const response = await axios.get(`${url}/service/brands`);
       console.log("check", response.data);
       setIsUpdate(false);
       setBrand(response.data);
@@ -69,7 +70,7 @@ const BrandManagement = () => {
     setDetailModal(true);
     try {
       const response = await axios.get(
-        `/api/service/brands/${selectedBrand.id}`
+        `${url}/service/brands/${selectedBrand.id}`
       );
       console.log("Here", response.data);
     } catch (error) {
@@ -109,7 +110,7 @@ const BrandManagement = () => {
     }
 
     try {
-      const response = await axios.post("/api/service/brands", formData, {
+      const response = await axios.post(`${url}/service/brands`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -148,7 +149,7 @@ const BrandManagement = () => {
     }
     try {
       const response = await axios.put(
-        `/api/service/brands/${selectedBrand.id}`,
+        `${url}/service/brands/${selectedBrand.id}`,
         formData
       );
       if (response.data) {
@@ -176,7 +177,7 @@ const BrandManagement = () => {
   const handleDeletebrand = async () => {
     try {
       const response = await axios.delete(
-        `/api/service/brands/${selectedBrand.id}`
+        `${url}/service/brands/${selectedBrand.id}`
       );
       toast.success("Brand is deleted successfully!");
       console.log("after delete", response.data);

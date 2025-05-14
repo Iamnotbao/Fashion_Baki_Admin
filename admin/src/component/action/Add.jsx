@@ -9,6 +9,7 @@ const Add = ({ onProductAdded }) => {
   const [brand, setBrand] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [selectedProduct, setselectedProduct] = useState({});
+  const url = import.meta.env.VITE_API_URL; 
   const addFile = (e) => {
     if (e.target && e.target.files && e.target.files.length > 0) {
       setFile(e.target.files[0]);
@@ -16,22 +17,22 @@ const Add = ({ onProductAdded }) => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/api/service/products");
+      const response = await axios.get(`${url}/service/products`);
       console.log("check product", response.data);
       setProducts(response.data);
     };
     const fetchBrand = async () => {
-      const response = await axios.get("/api/service/brands");
+      const response = await axios.get(`${url}/service/brands`);
       console.log("check brand", response.data);
       setBrand(response.data);
     };
     const fetchCategory = async () => {
-      const response = await axios.get("/api/service/categories");
+      const response = await axios.get(`${url}/service/categories`);
       console.log("check category", response.data);
       setCategory(response.data);
     };
     const fetchSub = async () => {
-      const response = await axios.get("/api/service/subcategories");
+      const response = await axios.get(`${url}/service/subcategories`);
       console.log("check sub", response.data);
       setSubcategories(response.data);
     };
@@ -69,7 +70,7 @@ const Add = ({ onProductAdded }) => {
     console.log(newproduct);
 
     try {
-      const response = await axios.post("/api/service/products", formData, {
+      const response = await axios.post(`${url}/service/products`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

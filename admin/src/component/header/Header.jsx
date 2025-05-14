@@ -6,7 +6,7 @@ import "./Header.css";
 const Header = () => {
     const username = localStorage.getItem("username");
     const navigation = useNavigate();
-    const logOutURL = "/api/auth/logout"
+    const logOutURL = import.meta.env.VITE_API_URL+"/auth/logout"
     const {logout} =  useAuthentication();
     const handleLogout = async () => {
         console.log("click");
@@ -15,7 +15,7 @@ const Header = () => {
             const response = await axios.post(logOutURL);
             if(response.data){
                 logout();
-                navigation("//authentication/signIn");
+                navigation("/authentication/signIn");
             }
         } catch (error) {
             console.log(error);

@@ -45,7 +45,7 @@ const CategoryManagement = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/api/service/categories");
+      const response = await axios.get(`${url}/service/categories`);
       console.log("check", response.data);
       setIsUpdate(false);
       setCategory(response.data);
@@ -56,7 +56,7 @@ const CategoryManagement = () => {
     setDetailModal(true);
     try {
       const response = await axios.get(
-        `/api/service/categories/${selectedCategory.id}`
+        `${url}/service/categories/${selectedCategory.id}`
       );
       console.log("Here", response.data);
     } catch (error) {
@@ -88,7 +88,7 @@ const CategoryManagement = () => {
 
     try {
       const response = await axios.post(
-        "/api/service/categories",
+        `${url}/service/categories`,
         newcategory
       );
       if (response.data) {
@@ -112,7 +112,7 @@ const CategoryManagement = () => {
 
     try {
       const response = await axios.put(
-        `/api/service/categories/${selectedCategory.id}`,
+        `${url}/service/categories/${selectedCategory.id}`,
         updatecategory
       );
       if (response.data) {
@@ -140,7 +140,7 @@ const CategoryManagement = () => {
   const handleDeletecategory = async () => {
     try {
       const response = await axios.delete(
-        `/api/service/categories/${selectedCategory.id}`
+        `${url}/service/categories/${selectedCategory.id}`
       );
       toast.success("Category is deleted successfully!");
       console.log("after delete", response.data);

@@ -19,7 +19,8 @@ const UserDisableManagement = () => {
   console.log(selectedUser);
   console.log("list", listUser);
 
-  const baseURL = "/api/users/disableUsers";
+  const baseURL = import.meta.env.VITE_API_URL+"users/disableUsers";
+  const url = import.meta.env.VITE_API_URL;
 
   const handleSubSort = (sortedArray) => {
     setUsers(sortedArray);
@@ -63,7 +64,7 @@ const UserDisableManagement = () => {
   const openDetailModal = async () => {
     setDetailModal(true);
     try {
-      const response = await axios.get(`/api/user/${selectedUser.id}`);
+      const response = await axios.get(`${url}/user/${selectedUser.id}`);
       console.log("Here", response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -101,7 +102,7 @@ const UserDisableManagement = () => {
       address: e.target.address.value,
     };
     try {
-      const response = await axios.post("/api/users/register", newEmployee);
+      const response = await axios.post(`${url}/users/register`, newEmployee);
       if (response.data) {
         toast.success("User is added successfully!");
       }
@@ -127,7 +128,7 @@ const UserDisableManagement = () => {
 
     try {
       const response = await axios.put(
-        `/api/users/${selectedUser.id}`,
+        `${url}/users/${selectedUser.id}`,
         updateEmployee
       );
       if (response.data) {
@@ -159,7 +160,7 @@ const UserDisableManagement = () => {
   const handleEnableEmployee = async () => {
     try {
       const response = await axios.put(
-        `/api/users/enable/${selectedUser.id}`,
+        `${url}/users/enable/${selectedUser.id}`,
         {}
       );
       if (response.data) {
@@ -175,7 +176,7 @@ const UserDisableManagement = () => {
   const handleDeleteEmployee = async () => {
     try {
       const response = await axios.delete(
-        `/api/users/${selectedUser.id}`,{
+        `${url}/users/${selectedUser.id}`,{
           withCredentials: true, 
           headers: {
             "Content-Type":"application/json" 

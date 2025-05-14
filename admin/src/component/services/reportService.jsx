@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = "/api/report";
+const baseUrl = import.meta.env.VIITE_API_URL+"/report";
 
 export const reportProductPerDate= async(month,year)=>{
     try 

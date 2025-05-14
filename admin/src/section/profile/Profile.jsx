@@ -12,7 +12,8 @@ const Profile = () => {
   const [activePopup, setActivePopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [file, setFile] = useState(null);
-  const baseURL = "/api/admin/profile";
+  const baseURL = import.meta.env.VITE_API_URL+"/admin/profile";
+  const url = import.meta.env.VITE_API_URL;
 
   console.log("newProfile", userProfile);
   console.log(" go file", file);
@@ -67,7 +68,7 @@ const Profile = () => {
       formData.append("file", newFile);
       try {
         const response = await axios.put(
-          "/api/admin/upload",
+          `${url}/admin/upload`,
           formData
         );
         console.log(response.data);

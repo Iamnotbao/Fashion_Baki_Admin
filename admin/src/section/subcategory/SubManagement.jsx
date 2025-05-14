@@ -17,6 +17,7 @@ const SubManagement = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [listUser, setListUser] = useState([]);
    const [isUpdate, setIsUpdate] = useState(false);
+   const url = import.meta.env.VITE_API_URL;
   console.log("bem", selectedSubcategories);
 
   const handleSubSort = (sortedArray) => {
@@ -48,14 +49,14 @@ const SubManagement = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/api/service/subcategories");
+      const response = await axios.get(`${url}/service/subcategories`);
       console.log("check", response.data);
       setIsUpdate(false);
       setSubcategories(response.data);
     };
     fetchData();
     const fetchCategory = async () => {
-      const response = await axios.get("/api/service/categories");
+      const response = await axios.get(`${url}/service/categories`);
       console.log("category", response.data);
       setCategory(response.data);
     };
@@ -65,7 +66,7 @@ const SubManagement = () => {
     setDetailModal(true);
     try {
       const response = await axios.get(
-        `/api/service/subcategories/${selectedSubcategories.id}`
+        `${url}/service/subcategories/${selectedSubcategories.id}`
       );
       console.log("Here", response.data);
     } catch (error) {
@@ -99,7 +100,7 @@ const SubManagement = () => {
 
     try {
       const response = await axios.post(
-        "/api/service/subcategories",
+        `${url}/service/subcategories`,
         newsubcategories
       );
       if (response.data) {
@@ -123,7 +124,7 @@ const SubManagement = () => {
 
     try {
       const response = await axios.put(
-        `/api/service/subcategories/${selectedSubcategories.id}`,
+        `${url}/service/subcategories/${selectedSubcategories.id}`,
         updatesubcategories
       );
       if (response.data) {
@@ -153,7 +154,7 @@ const SubManagement = () => {
   const handleDeletesubcategories = async () => {
     try {
       const response = await axios.delete(
-        `/api/service/subcategories/${selectedSubcategories.id}`
+        `${url}/service/subcategories/${selectedSubcategories.id}`
       );
       toast.success("Subcategory is deleted successfully!");
       console.log("after delete", response.data);

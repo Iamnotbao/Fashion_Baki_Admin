@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_BASE_URL = '/api/discount-codes';
+const API_BASE_URL = import.meta.env.VITE_API_URL+'/discount-codes';
 
 
 export const createDiscountCode = async (discount) => {

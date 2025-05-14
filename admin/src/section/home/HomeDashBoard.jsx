@@ -53,7 +53,7 @@ const HomeDashBoard = () => {
     
         client.onConnect = () => {
           console.log('Connected to WebSocket');
-          client.subscribe('/api/discount-codes', (message) => {
+          client.subscribe(`${api_url}/discount-codes`, (message) => {
             const response = JSON.parse(message.body);
             setOriginalPrice(response.originalPrice);
             setDiscountedPrice(response.discountedPrice);

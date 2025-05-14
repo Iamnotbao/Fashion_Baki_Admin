@@ -15,7 +15,7 @@ const StaffManagement = () => {
   const [showDetailModal, setDetailModal] = useState(false);
   const [check, setCheck] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const baseURL = "/api/admin";
+  const baseURL = import.meta.env.VITE_API_URL+"/admin";
 
   console.log(selectedStaff);
   const staffColumns = [

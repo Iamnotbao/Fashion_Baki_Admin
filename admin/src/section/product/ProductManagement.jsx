@@ -35,6 +35,7 @@ const ProductManagement = () => {
   const fileInputRef = useRef(null);
   let formData = new FormData();
   console.log(selectedFileName);
+  const url = import.meta.env.VITE_API_URL;
 
 
   const colors = ["blue", "red", "yellow", "white", "black"]
@@ -77,16 +78,16 @@ const ProductManagement = () => {
   useEffect(() => {
     fetchProductByPage();
     const fetchBrand = async () => {
-      const response = await axios.get("/api/service/brands");
+      const response = await axios.get(`${url}/service/brands`);
 
       setBrand(response.data);
     };
     const fetchCategory = async () => {
-      const response = await axios.get("/api/service/categories");
+      const response = await axios.get(`${url}/service/categories`);
       setCategory(response.data);
     };
     const fetchSub = async () => {
-      const response = await axios.get("/api/service/subcategories");
+      const response = await axios.get(`${url}/service/subcategories`);
       setSubcategories(response.data);
     };
     fetchBrand();
@@ -97,7 +98,7 @@ const ProductManagement = () => {
     setDetailModal(true);
     try {
       const response = await axios.get(
-        `/api/service/products/${selectedProduct.id}`
+        `${url}/service/products/${selectedProduct.id}`
       );
     } catch (error) {
       console.error("Error fetching product data:", error);
@@ -188,7 +189,7 @@ const ProductManagement = () => {
       console.log(key, value);
     }
     try {
-      const response = await axios.post("/api/service/products", formData, {
+      const response = await axios.post(`${url}/service/products`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -230,7 +231,7 @@ const ProductManagement = () => {
     }
     try {
       const response = await axios.put(
-        `/api/service/products/${selectedProduct.id}`, formData
+        `${url}/service/products/${selectedProduct.id}`, formData
       );
       if (response.data) {
         console.log("check update", response.data);
@@ -255,7 +256,7 @@ const ProductManagement = () => {
   const handleDeleteproduct = async () => {
     try {
       const response = await axios.delete(
-        `/api/service/products/${selectedProduct.id}`
+        `${url}/service/products/${selectedProduct.id}`
       );
       toast.success("Product is deleted successfully!");
       console.log("after delete", response.data);
