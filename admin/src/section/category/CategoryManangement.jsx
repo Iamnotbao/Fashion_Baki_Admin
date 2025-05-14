@@ -15,6 +15,7 @@ const CategoryManagement = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [listUser, setListUser] = useState([]);
    const [isUpdate, setIsUpdate] = useState(false);
+   const url = import.meta.env.VITE_API_URL;
   console.log(selectedCategory);
 
   const handleSort = (sortedArray) => {

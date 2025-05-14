@@ -8,7 +8,12 @@ export const createDiscountCode = async (discount) => {
     console.log("discount code: ", discount);   
     
     try {
-        const response = await axios.post(API_BASE_URL, discount);
+        const response = await axios.post(API_BASE_URL, discount,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("create discount code response: ", response.data);
         
         return response.data;
@@ -20,7 +25,12 @@ export const createDiscountCode = async (discount) => {
 }
 export const getAllDiscountCode = async () => {
     try {
-        const response = await axios.get(API_BASE_URL);
+        const response = await axios.get(API_BASE_URL,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("get all discount code response: ", response.data);
         
         return response.data;
@@ -31,7 +41,12 @@ export const getAllDiscountCode = async () => {
 }
 export const updateDiscountCode = async (id, discount) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/${id}`, discount);
+        const response = await axios.put(`${API_BASE_URL}/${id}`, discount,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("update discount code response: ", response.data);
         
         return response.data;
@@ -44,7 +59,12 @@ export const updateDiscountCode = async (id, discount) => {
 }
 export const deleteDiscountCode = async (id) => {
     try {
-        const response = await axios.delete(`${API_BASE_URL}/${id}`);
+        const response = await axios.delete(`${API_BASE_URL}/${id}`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("delete discount code response: ", response);
         return response.status === 204 ? response.status : "";
     }
@@ -56,7 +76,12 @@ export const deleteDiscountCode = async (id) => {
 }
 export const getDiscountCodeById = async (id) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/${id}`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("get discount code by id response: ", response.data);
         
         return response.data;
@@ -68,7 +93,12 @@ export const getDiscountCodeById = async (id) => {
 }
 export const getDiscountCodeByCode = async (code) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/code/${code}`);
+        const response = await axios.get(`${API_BASE_URL}/code/${code}`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
         console.log("get discount code by code response: ", response.data);
         
         return response.data;

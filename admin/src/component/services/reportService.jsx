@@ -7,7 +7,11 @@ export const reportProductPerDate= async(month,year)=>{
     {
       console.log(month," ",year);
       
-        const reponse = await axios.get(`${baseUrl}/revenue/daily?year=${year}&month=${month}`);
+        const reponse = await axios.get(`${baseUrl}/revenue/daily?year=${year}&month=${month}`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },withCredentials: true
+        });
 
         console.log("after response: ", reponse.data);
         
@@ -20,7 +24,11 @@ export const reportProductPerDate= async(month,year)=>{
 
 export const reportProductPerMonth= async(year)=>{
     try {
-        const reponse = await axios.get(`${baseUrl}/revenue/monthly?year=${year}`);
+        const reponse = await axios.get(`${baseUrl}/revenue/monthly?year=${year}`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },withCredentials: true
+        });
 
        
         
@@ -54,7 +62,11 @@ export const exportReport = async () => {
 
   export const reportStats = async () => {
     try {
-        const response = await axios.get(`${baseUrl}/payment-stats`);
+        const response = await axios.get(`${baseUrl}/payment-stats`,{
+            headers: {
+                'Content-Type': 'application/json',
+            },withCredentials: true
+        });
         return response.data ? response.data : ""
     } catch (error) {
         console.log(error);
