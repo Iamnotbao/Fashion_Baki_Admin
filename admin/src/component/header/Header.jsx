@@ -15,7 +15,7 @@ const Header = () => {
             const response = await axios.post(logOutURL);
             if(response.data){
                 logout();
-                navigation("/Fashion_Baki_Admin/authentication/signIn");
+                navigation("//authentication/signIn");
             }
         } catch (error) {
             console.log(error);
@@ -33,7 +33,7 @@ const Header = () => {
 
                     </div>
                     <div className="col-md-9">
-                        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                        <nav class="container-xxl navbar navbar-expand-xl  align-items-center mt-3 " id="layout-navbar">
                             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                                 <div class="serach_field-area d-flex align-items-center">
                                     <div class="search_inner">
@@ -44,7 +44,7 @@ const Header = () => {
                                             <button type="submit"><span><i class="fa-solid fa-magnifying-glass"></i></span> </button>
                                         </form>
                                     </div>
-                                    <span class="f_s_14 f_w_400 ml_25 white_text text_white">Apps</span>
+                                 
                                 </div>
 
                                 <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -83,7 +83,7 @@ const Header = () => {
                                                 <div class="dropdown-divider"></div>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item waves-effect" href="/Fashion_Baki_Admin/profile">
+                                                <a class="dropdown-item waves-effect" href="//profile">
                                                     <i class="ri-user-3-line ri-22px me-2"></i>
                                                     <span class="align-middle">My Profile</span>
                                                 </a>

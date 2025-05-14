@@ -27,7 +27,7 @@ const Login = () => {
       if (response.data.status === "success") {
         login(response.data.username, response.data.role);
         setData(response.data);
-        navigation("/Fashion_Baki_Admin/");
+        navigation("//");
       }
     }
     catch (error) {

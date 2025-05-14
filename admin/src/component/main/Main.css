@@ -1,3 +1,6 @@
 .home_page {
     background-color: rgba(0, 0, 0, .1);
 }
+.container-xxl{
+    padding: 0!important;
+}

@@ -9,6 +9,7 @@ import SubManagement from "../../section/subcategory/SubManagement";
 import StaffManagement from "../../section/staff/StaffManagement";
 import HomeDashBoard from "../../section/home/HomeDashBoard";
 import Profile from "../../section/profile/Profile";
+import "./Main.css";
 
 const Main = () => {
     const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -35,7 +36,7 @@ const Main = () => {
         }
       };
     return (<>
-        <div className="container-fluid home_page">
+        <div className="container-xxl home_page">
             <div className="row">
                 <div className="col-md-3">
                 <SideBar Menu={(section) => setActiveComponent(section)} />

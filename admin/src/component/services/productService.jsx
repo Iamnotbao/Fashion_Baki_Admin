@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const BASE_URL = "/api/service/products"
+const BASE_URL = import.meta.env.VITE_API_URL+ "/service/products";
 
 export const getProductByPage = async (page, size) => {
     try {
