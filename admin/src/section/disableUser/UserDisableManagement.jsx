@@ -19,11 +19,7 @@ const UserDisableManagement = () => {
   console.log(selectedUser);
   console.log("list", listUser);
 
-<<<<<<< HEAD
-  const baseURL = import.meta.env.VITE_API_URL+"/users/disableUsers";
-=======
   const baseURL = import.meta.env.VITE_API_URL + "/users/disableUsers";
->>>>>>> 50917004cf4e1bfb1eae4c739b449eea57a73668
   const url = import.meta.env.VITE_API_URL;
 
   const handleSubSort = (sortedArray) => {
