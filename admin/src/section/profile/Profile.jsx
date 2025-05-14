@@ -21,7 +21,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(baseURL);
+        const response = await axios.get(baseURL,{
+          headers: {
+            'Content-Type': 'application/json',
+          }, withCredentials: true  
+        });
         console.log("user", response.data);
         if (response.data) {
           setUserProfile(response.data);
