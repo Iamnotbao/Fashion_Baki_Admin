@@ -331,29 +331,11 @@ table.table .avatar {
     font-weight: bold;
     color: red;
 }
-/* .modalImp{
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    border: 1px solid black;
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    line-height: 100%;
-    background-color: white;
-
+.img_brand{
+    width: 100px;
+    height: 100px;
 }
-.modalDetail{
-    width: 600px;
-    height: 200px;
-    position: absolute;
-    top:200px;
-    left: 200px;
-    background-color: white;
+.img_brand > img{
+    max-width: 100%;
+    height: 100%;
 }
-
- */
