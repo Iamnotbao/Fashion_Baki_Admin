@@ -73,7 +73,11 @@ const Profile = () => {
       try {
         const response = await axios.put(
           `${url}/admin/upload`,
-          formData
+          formData,{
+            headers: {
+              'Content-Type': 'multipart/form-data',  
+          },withCredentials: true
+        }
         );
         console.log(response.data);
         if (response.data) {
