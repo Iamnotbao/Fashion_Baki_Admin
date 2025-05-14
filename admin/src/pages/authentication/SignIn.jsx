@@ -8,7 +8,7 @@ const Login = () => {
   const navigation = useNavigate();
   const [usernameOrEmail, setusernameOrEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const baseURL = "/api/auth/admin/login"
+  const baseURL = import.meta.env.VITE_API_URL+"/auth/admin/login"
   const { login } = useAuthentication();
 
   async function handleLogin() {
@@ -27,7 +27,7 @@ const Login = () => {
       if (response.data.status === "success") {
         login(response.data.username, response.data.role);
         setData(response.data);
-        navigation("//");
+        navigation("/");
       }
     }
     catch (error) {
