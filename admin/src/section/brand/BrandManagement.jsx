@@ -375,7 +375,7 @@ const BrandManagement = () => {
                 <tbody>
                   <tr>
                     <td>{selectedBrand.name}</td>
-                    <td>{selectedBrand.logo}</td>
+                    <td><img src={selectedBrand.logo}></img></td>
                     <td>
                       <button
                         onClick={closeDetailModal}
