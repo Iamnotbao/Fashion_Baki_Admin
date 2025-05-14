@@ -40,7 +40,11 @@ const UserManagement = () => {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(baseURL);
+      const response = await axios.get(baseURL,{
+        headers: {
+          "Content-Type": "application/json",
+        },withCredentials: true
+      });
       console.log("check", response.data);
       setUsers(response.data);
     };
