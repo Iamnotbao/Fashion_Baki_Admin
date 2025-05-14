@@ -38,7 +38,11 @@ const UserDisableManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(baseURL);
+      const response = await axios.get(baseURL,{
+        headers:{
+          "Content-Type":"application/json"
+        },withCredentials: true
+      });
       console.log("check", response.data);
       setUsers(response.data);
       setLoading(false);
@@ -64,7 +68,12 @@ const UserDisableManagement = () => {
   const openDetailModal = async () => {
     setDetailModal(true);
     try {
-      const response = await axios.get(`${url}/user/${selectedUser.id}`);
+      const response = await axios.get(`${url}/user/${selectedUser.id}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       console.log("Here", response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -102,7 +111,12 @@ const UserDisableManagement = () => {
       address: e.target.address.value,
     };
     try {
-      const response = await axios.post(`${url}/users/register`, newEmployee);
+      const response = await axios.post(`${url}/users/register`, newEmployee,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       if (response.data) {
         toast.success("User is added successfully!");
       }
@@ -128,7 +142,11 @@ const UserDisableManagement = () => {
 
     try {
       const response = await axios.put(
-        `${url}/users/${selectedUser.id}`,
+        `${url}/users/${selectedUser.id}`,{
+          headers: {
+            "Content-Type": "application/json",
+          },withCredentials: true
+        },
         updateEmployee
       );
       if (response.data) {
@@ -161,7 +179,11 @@ const UserDisableManagement = () => {
     try {
       const response = await axios.put(
         `${url}/users/enable/${selectedUser.id}`,
-        {}
+        {},{
+          headers: {
+            "Content-Type": "application/json",
+          },withCredentials: true
+        }
       );
       if (response.data) {
         toast.success("User is enabled successfully!");
@@ -180,7 +202,7 @@ const UserDisableManagement = () => {
           withCredentials: true, 
           headers: {
             "Content-Type":"application/json" 
-          },}
+          },withCredentials: true}
       );
       if (response.data) {
         toast.success("User is deleted successfully!");
