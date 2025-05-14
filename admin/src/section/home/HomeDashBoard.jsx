@@ -29,8 +29,16 @@ const HomeDashBoard = () => {
 
     const username = 'admin';
     const password = 'admin123';
+
+
+    const api_url = import.meta.env.VITE_API_URL;
+    const webSocket = import.meta.env.VITE_WEBSOCKET_URL;
+    
+    const url = new URL(api_url);
+    url.pathname = webSocket;
+    
     useEffect(() => {
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS(webSocket);
         const client = new Client({
           webSocketFactory: () => socket,
           connectHeaders: {
@@ -62,7 +70,6 @@ const HomeDashBoard = () => {
         client.activate();
         setStompClient(client);
     
-        // Cleanup on unmount
         return () => {
           if (client) {
             client.deactivate();
