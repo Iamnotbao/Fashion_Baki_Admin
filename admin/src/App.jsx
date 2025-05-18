@@ -17,6 +17,7 @@ import StockManagement from "./section/stock/StockManagement.jsx";
 import ReviewManagement from "./section/review/ReviewManagement.jsx";
 import DiscountManagement from "./section/discount/DiscountManagement.jsx";
 import OrderManagement from "./section/order/OrderManagement.jsx";
+import NotificationManagement from "./section/notification/NotificationManagement.jsx";
 
 
 
@@ -53,6 +54,7 @@ const App = () => (
       <Route path="subcategory" element={<SubManagement />} />
       <Route path="discount" element={<DiscountManagement />} />
       <Route path="review" element={<ReviewManagement />} />
+      <Route path="notification" element={<NotificationManagement />} />
       <Route path="profile" element={<Profile />} />
     </Route>
   </Routes>

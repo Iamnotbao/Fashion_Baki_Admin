@@ -2,8 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom"; // Use NavLink for routing
 import "./SideBar.css";
 
-const SideBar = ({ Menu }) => {
+const SideBar = () => {
     const role = localStorage.getItem("role");
+
     return (
         <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar">
             <a
@@ -176,7 +177,18 @@ const SideBar = ({ Menu }) => {
                         Profile
                     </NavLink>
                 </li>
-               
+               <li>
+                   <NavLink
+                       to="notification"
+                       className="nav-link"
+                       activeClassName="active"
+                   >
+                       <svg className="bi me-2" width="16" height="16">
+                           <use xlinkHref="#grid" />
+                       </svg>
+                       Notification
+                   </NavLink>
+               </li>
             </ul>
             <hr />
         </div>
