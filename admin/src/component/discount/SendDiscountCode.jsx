@@ -26,9 +26,9 @@ import { format } from "date-fns";
 import SendIcon from "@mui/icons-material/Send";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PeopleIcon from "@mui/icons-material/People";
-import { connectWebSocket, disconnectWebSocket, sendNotification } from "../services/notificationService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { connectDiscountSocket, disconnectDiscountSocket, sendDiscount } from "../services/discountService";
 
 const SendDiscountCode = ({ selectedDiscount = {} }) => {
     const [selectedUsers, setSelectedUsers] = useState("all");
@@ -39,13 +39,13 @@ const SendDiscountCode = ({ selectedDiscount = {} }) => {
 
 
     useEffect(() => {
-        connectWebSocket('1', (notification) => {
+        connectDiscountSocket('1', (notification) => {
             console.log("Notification received:", notification);
             toast.info(notification.title);
         });
 
         return () => {
-            disconnectWebSocket();
+            disconnectDiscountSocket();
         };
     }, []);
 
@@ -57,7 +57,7 @@ const SendDiscountCode = ({ selectedDiscount = {} }) => {
         const code = formData.get("code");
         const user = formData.get("user");
         try {
-            await sendNotification(
+            await sendDiscount(
                 {
                     code: code,
                     userId: user,

@@ -116,7 +116,7 @@ export const getDiscountCodeByCode = async (code) => {
 
 
 
-export const connectWebSocket = async (userId, onMessage) => {
+export const connectDiscountSocket = async (userId, onMessage) => {
     const socket = new SockJS(url)
     stompClient = Stomp.over(socket)
     stompClient.connect({},() => {
@@ -129,7 +129,7 @@ export const connectWebSocket = async (userId, onMessage) => {
 })
 }
 
-export const disconnectWebSocket = () => {
+export const disconnectDiscountSocket = () => {
     if (stompClient && stompClient.connected) {
         stompClient.disconnect(() => {
             console.log("Disconnected from WebSocket")
@@ -137,7 +137,7 @@ export const disconnectWebSocket = () => {
     }
 }
 
-export const sendNotification = (payload) => {
+export const sendDiscount = (payload) => {
     if (stompClient && stompClient.connected) {
         stompClient.send(`/app/admin-assign-discount`, {}, JSON.stringify(payload))
     } else {
