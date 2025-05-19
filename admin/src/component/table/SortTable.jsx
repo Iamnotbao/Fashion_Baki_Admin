@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import TableHeader from '../table/TableHeader';
 import { Switch } from '@mui/material';
 import OrderDetail from '../order/OrderDetails';
+import moment from 'moment';
 
 const SortTable = ({
   products,
@@ -151,6 +152,12 @@ const SortTable = ({
                     `${product.totalPrice.toFixed(2)}$`
                   ): column.key === 'percentage' ? (
                     `${product[column.key]}%`
+                  )
+                  : column.key === 'createdAt' ? (
+                      moment(product.creatAt).format('Do MMMM YYYY')
+                  )
+                   : column.key === 'expirationDate' ? (
+                      moment(product.expirationDate).format('Do MMMM YYYY')
                   )
                    : (
                     product[column.key]

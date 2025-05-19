@@ -17,6 +17,9 @@ const DiscountManagement = () => {
         { key: "id", label: "No." },
         { key: "code", label: "Code" },
         { key: "percentage", label: "Rate" },
+        { key: "createdAt", label: "Create Time" },
+        { key: "expirationDate", label: "Expire Time" },
+        { key: "expired", label: "Expire" },
 
     ];
     const closeAddModal = () => setShowAddModal(false);
@@ -225,6 +228,17 @@ const DiscountManagement = () => {
                                         id="percentage"
                                         min="0"
                                         max="100"
+                                        required
+                                    />
+                                </div>
+                                 <div className="form-group">
+                                    <label htmlFor="percentage">Expiration Date</label>
+                                    <input
+                                        type="date"
+                                        name="expireDate"
+                                        className="form-control"
+                                        placeholder="date..."
+                                        id="expireDate"
                                         required
                                     />
                                 </div>
