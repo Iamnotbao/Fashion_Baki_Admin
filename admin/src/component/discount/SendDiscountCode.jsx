@@ -55,10 +55,7 @@ const SendDiscountCode = ({ selectedDiscount = {} }) => {
 
         const formData = new FormData(event.target);
         const code = formData.get("code");
-        const amount = formData.get("amount");
-        const minPurchase = formData.get("minPurchase") || 0;
         const user = formData.get("user");
-
         try {
             await sendNotification(
                 {
