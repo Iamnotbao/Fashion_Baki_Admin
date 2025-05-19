@@ -3,14 +3,21 @@ import { createDiscountCode, deleteDiscountCode, getAllDiscountCode, updateDisco
 import { ToastContainer, toast } from "react-toastify";
 import SortTable from "../../component/table/SortTable";
 import Delete from "../../component/action/Delete";
+import SendDiscountCode from "../../component/discount/SendDiscountCode";
+import { Dialog, DialogContent } from "@mui/material";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const DiscountManagement = () => {
     const [discounts, setDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showDiscountSend, setShowDiscountSend] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
-     const [showEditModal, setShowEditModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     console.log("discounts", selectedDiscount);
 
     const discountColumns = [
@@ -32,10 +39,17 @@ const DiscountManagement = () => {
     const closeDeleteModal = () => setShowDeleteModal(false);
     const openEditModal = (category) => {
         setShowEditModal(true);
-      };
-      const closeEditModal = () => setShowEditModal(false);
+    };
+    const closeEditModal = () => setShowEditModal(false);
     const handleDiscountSelect = (order) => {
         setSelectedDiscount(order);
+    };
+
+    const openDiscountSend = () => {
+        setShowDiscountSend(true);
+    };
+    const closeDiscountSend = () => {
+        setShowDiscountSend(false);
     };
     const handleSort = (sortedArray) => {
         setDiscounts(sortedArray);
@@ -176,6 +190,8 @@ const DiscountManagement = () => {
                         openDeleteModal={openDeleteModal}
                         tableName={"discount"}
                         openEditModal={openEditModal}
+                        openDiscountSend={openDiscountSend}
+                        closeDiscountSend={closeDiscountSend}
                     />
                 </div>
             </div>
@@ -231,7 +247,7 @@ const DiscountManagement = () => {
                                         required
                                     />
                                 </div>
-                                 <div className="form-group">
+                                <div className="form-group">
                                     <label htmlFor="percentage">Expiration Date</label>
                                     <input
                                         type="date"
@@ -263,7 +279,7 @@ const DiscountManagement = () => {
                 </div>
             </div>
         )}
-            {showEditModal && (
+        {showEditModal && (
             <div
                 className="modal fade show"
                 id="exampleModal"
@@ -345,6 +361,20 @@ const DiscountManagement = () => {
                 table={"discount"}
             />
         )}
+        {
+            showDiscountSend && (
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={showDiscountSend}
+                    onClose={closeDiscountSend}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogContent>
+                        <SendDiscountCode selectedDiscount={selectedDiscount}/>
+                    </DialogContent>
+                </Dialog>
+            )
+        }
     </>);
 }
 

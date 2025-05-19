@@ -22,7 +22,9 @@ const SortTable = ({
   headCells,
   handleEdit,
   productByStock,
-  setLoading
+  setLoading,
+  openDiscountSend,
+  closeDiscountSend
 
 }) => {
   const [sort, setSort] = useState({ key: null, direction: 'ascending' });
@@ -185,6 +187,19 @@ const SortTable = ({
                         </button>
                       </li>
                     )}
+                    {tableName == "discount" &&(
+                        <li className="list-inline-item" onClick={openDiscountSend}>
+                        <button
+                          className="btn btn-primary btn-sm rounded-0"
+                          type="button"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Send"
+                        >
+                          <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                      </li>
+                    )}
                   <li className="list-inline-item" onClick={openEditModal}>
                     <button
                       className="btn btn-success btn-sm rounded-0"
@@ -196,6 +211,7 @@ const SortTable = ({
                       <i className="fa fa-edit"></i>
                     </button>
                   </li>
+                  
                   {tableName !== 'user' && (
                     <li className="list-inline-item" onClick={openDeleteModal}>
                       <button

@@ -16,7 +16,7 @@ const Profile = () => {
   const url = import.meta.env.VITE_API_URL;
 
   console.log("newProfile", userProfile);
-  console.log(" go file", file);
+  console.log("go file", file);
 
   useEffect(() => {
     const fetchData = async () => {
