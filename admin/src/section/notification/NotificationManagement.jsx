@@ -19,7 +19,7 @@ import {
 const NotificationManagement = () => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        connectWebSocket('1', (notification) => {
+        connectWebSocket('4', (notification) => {
             console.log("Notification received:", notification);
         });
         return () => {
@@ -36,6 +36,7 @@ const NotificationManagement = () => {
     ];
 
     const handleSend = async () => {
+        event.preventDefault();
         const formData = new FormData(event.target);
         const userId = formData.get("user");
         const title = formData.get("title");
