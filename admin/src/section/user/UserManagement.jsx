@@ -43,8 +43,8 @@ const UserManagement = () => {
       const response = await axios.get(baseURL,{
         headers:{
           "Content-Type": "application/json",
-        }
-      },withCredentials=true);
+        }, withCredentials: true  
+      });
       console.log("check", response.data);
       setUsers(response.data);
     };
