@@ -44,7 +44,7 @@ export const getAllNotification = async () => {
             },
             withCredentials: true,
         });
-        return response.data ? response.data : [];
+        return response.data ? response.data.content : [];
     } catch (error) {
         console.error("Error fetching notifications:", error);
         throw error;
