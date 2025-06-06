@@ -4,6 +4,8 @@ import TableHeader from '../table/TableHeader';
 import { Switch } from '@mui/material';
 import OrderDetail from '../order/OrderDetails';
 import moment from 'moment';
+import Check from "../../assets/images/logo/check.png";
+import Uncheck from "../../assets/images/logo/uncheck.png";
 
 const SortTable = ({
   products,
@@ -23,7 +25,7 @@ const SortTable = ({
   handleEdit,
   productByStock,
   setLoading,
-  openDiscountSend,
+  openSend,
   closeDiscountSend
 
 }) => {
@@ -32,12 +34,12 @@ const SortTable = ({
   const [productStatus, setProductStatus] = useState({});
 
   const tableNeedSwitch = ["user", "user_disable"];
-  console.log("gg",productByStock);
+  console.log("gg", productByStock);
 
   const url = import.meta.env.VITE_API_URL;
-  
 
- 
+
+
   useEffect(() => {
     const fetchCategory = async () => {
       const response = await axios.get(`${url}/service/categories`);
@@ -152,55 +154,66 @@ const SortTable = ({
                     })()
                   ) : column.key === 'totalPrice' ? (
                     `${product.totalPrice.toFixed(2)}$`
-                  ): column.key === 'percentage' ? (
+                  ) : column.key === 'percentage' ? (
                     `${product[column.key]}%`
                   )
-                  : column.key === 'createdAt' ? (
+                    : column.key === 'createdAt' ? (
                       moment(product.creatAt).format('Do MMMM YYYY')
-                  )
-                   : column.key === 'expirationDate' ? (
-                      moment(product.expirationDate).format('Do MMMM YYYY')
-                  )
-                   : (
-                    product[column.key]
-                  )}
+                    )
+                      : column.key === 'sentAt' ? (
+                        moment(product.sentAt).format('Do MMMM YYYY')
+                      )
+                        : column.key === 'expirationDate' ? (
+                          moment(product.expirationDate).format('Do MMMM YYYY')
+                        )
+                          : column.key === 'expired' ? (
+                          <img
+                            src={product.expired ? Uncheck : Check}
+                            alt={product.expired ? "Expired" : "Active"}
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        )
+                          : (
+                            product[column.key]
+                          )}
                 </td>
               ))}
               <td>
-                {tableName !== "order" && tableName!=="stock" && tableName!=="review"? (<ul className="list-inline m-0 d-flex justify-content-end">
+                {tableName !== "order" && tableName !== "stock" && tableName !== "review" ? (<ul className="list-inline m-0 d-flex justify-content-end">
                   {tableNeedSwitch.includes(tableName) && <li className="list-inline-item">
                     <Switch
                       checked={tableName === "user_disable" ? false : true}
                       onChange={() => handleSwitchChange(product.id)}
                     />
                   </li>}
-                    {tableName !== "discount" &&(
-                        <li className="list-inline-item" onClick={openDetailModal}>
-                        <button
-                          className="btn btn-primary btn-sm rounded-0"
-                          type="button"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="View"
-                        >
-                          <i className="fa fa-table"></i>
-                        </button>
-                      </li>
-                    )}
-                    {tableName == "discount" &&(
-                        <li className="list-inline-item" onClick={openDiscountSend}>
-                        <button
-                          className="btn btn-primary btn-sm rounded-0"
-                          type="button"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Send"
-                        >
-                          <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                      </li>
-                    )}
-                  <li className="list-inline-item" onClick={openEditModal}>
+                  {tableName !== "discount" && (
+                    <li className="list-inline-item" onClick={openDetailModal}>
+                      <button
+                        className="btn btn-primary btn-sm rounded-0"
+                        type="button"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="View"
+                      >
+                        <i className="fa fa-table"></i>
+                      </button>
+                    </li>
+                  )}
+                  {tableName == "discount" && (
+                    <li className="list-inline-item" onClick={openSend}>
+                      <button
+                        className="btn btn-primary btn-sm rounded-0"
+                        type="button"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Send"
+                      >
+                        <i class="fa-solid fa-paper-plane"></i>
+                      </button>
+                    </li>
+                  )}
+                  {tableName !== "notification" && (
+                    <li className="list-inline-item" onClick={openEditModal}>
                     <button
                       className="btn btn-success btn-sm rounded-0"
                       type="button"
@@ -210,8 +223,10 @@ const SortTable = ({
                     >
                       <i className="fa fa-edit"></i>
                     </button>
-                  </li>
-                  
+                  </li>)
+                  }
+
+
                   {tableName !== 'user' && (
                     <li className="list-inline-item" onClick={openDeleteModal}>
                       <button
@@ -226,7 +241,7 @@ const SortTable = ({
                     </li>
                   )}
                 </ul>) : (
-                  (tableName === "order" || tableName==="stock" || tableName==="review")  && (
+                  (tableName === "order" || tableName === "stock" || tableName === "review") && (
                     <ul style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 0, paddingLeft: 0 }}>
 
                       <li className="list-inline-item" onClick={() => handleDetail()}>
@@ -237,7 +252,7 @@ const SortTable = ({
                           data-placement="top"
                           title="Pending"
                         >
-                          <span><a  style={{ margin: "0", fontSize: "15px", fontWeight: "500" }}>View</a></span>
+                          <span><a style={{ margin: "0", fontSize: "15px", fontWeight: "500" }}>View</a></span>
                         </button>
                       </li>
                     </ul>
@@ -249,7 +264,7 @@ const SortTable = ({
           ))}
         </tbody>
       </table>
-      {open && <OrderDetail productId={productByStock}setLoading={setLoading} edit={openEditModal} open={open} handleDetail={handleDetail} orderDetails={orderDetails} headCells={headCells} tableName={tableName} handleEdit={handleEdit} selectedStock={productByStock} />}
+      {open && <OrderDetail productId={productByStock} setLoading={setLoading} edit={openEditModal} open={open} handleDetail={handleDetail} orderDetails={orderDetails} headCells={headCells} tableName={tableName} handleEdit={handleEdit} selectedStock={productByStock} />}
     </div>
 
   );

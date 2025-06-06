@@ -26,7 +26,7 @@ const DiscountManagement = () => {
         { key: "percentage", label: "Rate" },
         { key: "createdAt", label: "Create Time" },
         { key: "expirationDate", label: "Expire Time" },
-        { key: "expired", label: "Expire" },
+        { key: "expired", label: "Active" },
 
     ];
     const closeAddModal = () => setShowAddModal(false);

@@ -360,6 +360,7 @@ table.table .avatar {
     border-radius: 50%;
     border: 1px solid #686868;
 }
+
 /* .modalImp{
     top: 50%;
     left: 50%;
@@ -376,13 +377,6 @@ table.table .avatar {
     background-color: white;
 
 }
-.modalDetail{
-    width: 600px;
-    height: 200px;
-    position: absolute;
-    top:200px;
-    left: 200px;
-    background-color: white;
-}
+
 
  */

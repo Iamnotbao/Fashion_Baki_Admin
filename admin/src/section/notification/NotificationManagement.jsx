@@ -1,147 +1,236 @@
 import { useEffect, useState } from "react";
-import { connectWebSocket, disconnectWebSocket, sendNotification } from "../../component/services/notificationService";
 import { ToastContainer, toast } from "react-toastify";
-import SendIcon from "@mui/icons-material/Send";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    Typography,
-    Grid,
-    Button,
+import SortTable from "../../component/table/SortTable";
+import { Dialog, DialogContent } from "@mui/material";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import SendNotification from "../../component/notification/SendNotification";
+import { getAllNotification } from "../../component/services/notificationService";
+import moment from "moment";
 
-    Box,
-    Divider,
-    CircularProgress,
-    TextField,
-    InputLabel
-} from "@mui/material";
 const NotificationManagement = () => {
+    const [notifications, setNotifications] = useState([]);
+    const [selectedNotification, setSelectedNotification] = useState({});
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showNotificationSend, setShowNotificationSend] = useState(false);
+    const [showDetailModal, setShowDetailModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        connectWebSocket('4', (notification) => {
-            console.log("Notification received:", notification);
-        });
-        return () => {
-            disconnectWebSocket();
-        }
-    }, []);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    console.log("notifications", selectedNotification);
 
     const notificationColumns = [
         { key: "id", label: "No." },
-        { key: "title", label: "Content" },
-        { key: "sendAt", label: "Time" },
-        { key: "status", label: "Status Of Message" }
+        { key: "title", label: "Title" },
+        { key: "content", label: "Content" },
+        { key: "sentAt", label: "Send Time" },
+        { key: "status", label: "Status" },
+        { key: "userId", label: "To User" },
 
     ];
+    const closeDetailModal = () => setShowDetailModal(false);
+    const openDeleteModal = () => {
+        setShowDeleteModal(true);
+    };
+    const openDetailModal = () => {
+        setShowDetailModal(true);
+    };
+    const closeDeleteModal = () => setShowDeleteModal(false);
 
-    const handleSend = async () => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const userId = formData.get("user");
-        const title = formData.get("title");
-        const content = formData.get("content");
-
-
-
-        try {
-            await sendNotification({
-                userId: userId,
-                title: title,
-                content: content,
-            })
-            toast.success(`The notification has been sent to ${userId}.`);
-        } catch (error) {
-            console.error("Error sending discount code:", error);
-            toast.error("Failed to send discount code. Please try again.");
-        } finally {
-            setLoading(false);
-        }
+    const handleNotificationSelect = (notification) => {
+        setSelectedNotification(notification);
     };
 
+    const openNotificationSend = () => {
+        setShowNotificationSend(true);
+    };
+    const closeNotificationSend = () => {
+        setShowNotificationSend(false);
+    };
+    const handleSort = (sortedArray) => {
+        setNotifications(sortedArray);
+    };
+    const deleteNotification = async () => {
+        try {
+            const response = await deleteNotification(selectedNotification.id);
+            if (response === 204) {
+                toast.success("Notification deleted successfully!");
+                setLoading(false);
+            }
+            closeDeleteModal();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
-
-    return (<>
-        <ToastContainer position="top-right" />
-        <Card sx={{ maxWidth: 900, mx: "auto", mb: 4 }}>
-            <CardHeader
-                title={
-                    <Typography variant="h5" component="h2" sx={{ fontWeight: "bold" }}>
-                        Notification
-                    </Typography>
+    useEffect(() => {
+        const fetchAllNotifications = async () => {
+            try {
+                const response = await getAllNotification();
+                console.log("rev notifications", response);
+                if (response) {
+                    setNotifications(response);
+                    setLoading(true);
                 }
-                subheader="Create and send notification"
-            />
-            <CardContent>
-                <form onSubmit={handleSend}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} md={6}>
-                            <Box sx={{ mb: 3 }}>
-                                <InputLabel sx={{ fontWeight: "bold", color: "#333333", fontSize: "22px" }} id="user-type-label">User</InputLabel>
-                                <TextField
-                                    name="user"
-                                    placeholder="Choose User..."
-                                    variant="outlined"
-                                    helperText="Choose the user you want to send "
-                                />
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box>
-                                <InputLabel sx={{ fontWeight: "bold", color: "#333333", fontSize: "22px", marginBottom: "7px" }} id="user-type-label">Annoucement</InputLabel>
-                                <TextField
-                                    name="title"
-                                    label="Title"
-                                    placeholder="Enter the title..."
-                                    fullWidth
-                                    multiline
-                                    rows={1}
-                                    variant="outlined"
-                                    helperText="This title will be sent to user"
-                                />
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box sx={{ mb: 3 }}>
-                                <TextField
-                                    name="content"
-                                    label="Content"
-                                    placeholder="Enter an content..."
-                                    fullWidth
-                                    multiline
-                                    rows={4}
-                                    variant="outlined"
-                                    helperText="This notification will be sent to user"
-                                />
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={4} sx={{ ml: "auto", mr: "auto" }}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                                size="large"
-                                disabled={loading}
-                                startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <SendIcon />}
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchAllNotifications();
+    }, [loading])
+    return (<>
+        <div className="container-xl">
+            <div className="table-responsive">
+                <ToastContainer />
+                <h1 style={{ textAlign: "center", marginBottom: "12px" }}>
+                    Notification Management
+                </h1>
+                <div className="table-wrapper">
+                    <div className="table-title">
+                        <div className="row">
+                            <div className="col-sm-6"></div>
+                            <div
+                                className="col-sm-6"
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                }}
                             >
-                                {loading ? "Processing..." : "Send Announcement"}
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </form>
-            </CardContent>
-            <Divider />
-            <Box sx={{ p: 2, bgcolor: "#f5f5f5" }}>
-                <Typography variant="caption" color="text.secondary">
-                    Notification will be sent directly to user.
-                    Client will be received an email approve that announcement has been sent.
-                </Typography>
-            </Box>
-        </Card>
+                                <div class="input-group">
+                                    <input
+                                        type="search"
+                                        class="form-control rounded"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                        aria-describedby="search-addon"
+                                    />
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary"
+                                        data-mdb-ripple-init
+                                    >
+                                        <i class="fas fa-search"></i>
+                                    </button>
 
-
+                                </div>
+                                <div
+                                    class="input-group"
+                                    style={{
+                                        width: "340px",
+                                        display: "flex",
+                                        justifyContent: "end",
+                                    }}
+                                >
+                                    <button
+                                        onClick={openNotificationSend}
+                                        type="button"
+                                        class="btn btn-primary btn-sm"
+                                    >
+                                        <i className="material-icons">&#xE147;</i> <span>Send</span>
+                                    </button>
+                                    <button
+                                        onClick={() => openDeleteModal()}
+                                        type="button"
+                                        class="btn btn-danger btn-sm"
+                                        style={{ marginLeft: "10px" }}
+                                    >
+                                        <i className="material-icons">&#xE15C;</i>{" "}
+                                        <span>Delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <SortTable
+                        products={notifications}
+                        onSort={handleSort}
+                        columns={notificationColumns}
+                        onProductSelect={handleNotificationSelect}
+                        openDetailModal={openDetailModal}
+                        openDeleteModal={openDeleteModal}
+                        selectedCategory={selectedNotification}
+                        tableName={"notification"}
+                    />
+                </div>
+            </div>
+        </div>
+      {showDetailModal && (
+        <div
+          class="modal show bd-example-modal-lg"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myLargeModalLabel"
+          aria-hidden="true"
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <table class="table table-bordered modalDetail">
+                <thead>
+                  <tr>
+                    {/* <th>ID</th> */}
+                    <th>No</th>
+                    <th>title</th>
+                    <th>content</th>
+                    <th>send time</th>
+                    <th>status</th>
+                    <th>to user</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+             
+                    <td>{selectedNotification.id}</td>
+                    <td>{selectedNotification.title}</td>
+                    <td>{selectedNotification.content}</td>
+                    <td>{moment(selectedNotification.sentAt).format('Do MMMM YYYY')}</td>
+                    <td>{selectedNotification.status}</td>
+                    <td>{selectedNotification.userId}</td>
+                    <td>
+                      <button
+                        onClick={closeDetailModal}
+                        class="btn btn-danger btn-sm rounded-0"
+                        type="button"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Delete"
+                      >
+                        X
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+                                    
+        {/* {showDeleteModal && (
+            <Delete
+                closeDeleteModal={closeDeleteModal}
+                selectedProduct={selectedDiscount}
+                handleDeleteproduct={deleteDiscount}
+                table={"discount"}
+            />
+        )} */}
+        {
+            showNotificationSend && (
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={showNotificationSend}
+                    onClose={closeNotificationSend}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogContent>
+                        <SendNotification/>
+                    </DialogContent>
+                </Dialog>
+            )
+        }
     </>);
 }
 

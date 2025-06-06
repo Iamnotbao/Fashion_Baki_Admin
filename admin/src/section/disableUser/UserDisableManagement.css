@@ -316,12 +316,7 @@ table.table .avatar {
    
    
 }
-.modalDetail{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
+ 
 .buttonGroup button {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.195)
