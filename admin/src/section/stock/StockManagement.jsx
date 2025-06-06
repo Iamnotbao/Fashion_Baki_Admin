@@ -108,31 +108,7 @@ const StockManagement = () => {
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                {/* <div
-                  class="input-group"
-                  style={{
-                    width: "340px",
-                    display: "flex",
-                    justifyContent: "end",
-                  }}
-                >
-                  <button
-                    onClick={openAddModal}
-                    type="button"
-                    class="btn btn-primary btn-sm"
-                  >
-                    <i className="material-icons">&#xE147;</i> <span>Add</span>
-                  </button>
-                  <button
-                    onClick={() => openDeleteModal()}
-                    type="button"
-                    class="btn btn-danger btn-sm"
-                    style={{ marginLeft: "10px" }}
-                  >
-                    <i className="material-icons">&#xE15C;</i>{" "}
-                    <span>Delete</span>
-                  </button>
-                </div> */}
+                               
                             </div>
                         </div>
                     </div>
@@ -153,18 +129,7 @@ const StockManagement = () => {
                         setLoading={setLoading}
                     />
                 </div>
-                {/* <div class="clearfix">
-                      <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                      <ul class="pagination">
-                          <li class="page-item disabled"><a href="#">Previous</a></li>
-                          <li class="page-item"><a href="#" class="page-link">1</a></li>
-                          <li class="page-item"><a href="#" class="page-link">2</a></li>
-                          <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                          <li class="page-item"><a href="#" class="page-link">4</a></li>
-                          <li class="page-item"><a href="#" class="page-link">5</a></li>
-                          <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                      </ul>
-                  </div> */}
+                
             </div>
         </div>
 

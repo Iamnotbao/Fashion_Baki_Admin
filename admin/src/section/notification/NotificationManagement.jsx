@@ -5,8 +5,10 @@ import { Dialog, DialogContent } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import SendNotification from "../../component/notification/SendNotification";
-import { getAllNotification } from "../../component/services/notificationService";
+import { deleteNotification, getAllNotification } from "../../component/services/notificationService";
 import moment from "moment";
+import Delete from "../../component/action/Delete";
+import Paging from "../../component/table/Paging";
 
 const NotificationManagement = () => {
     const [notifications, setNotifications] = useState([]);
@@ -15,9 +17,12 @@ const NotificationManagement = () => {
     const [showNotificationSend, setShowNotificationSend] = useState(false);
     const [showDetailModal, setShowDetailModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [totalPages, setTotalPages] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(8);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    console.log("notifications", selectedNotification);
+    console.log("notifications", totalPages);
 
     const notificationColumns = [
         { key: "id", label: "No." },
@@ -28,6 +33,9 @@ const NotificationManagement = () => {
         { key: "userId", label: "To User" },
 
     ];
+      const handlePage = (numberOfPage) => {
+        setPage(numberOfPage)
+  }
     const closeDetailModal = () => setShowDetailModal(false);
     const openDeleteModal = () => {
         setShowDeleteModal(true);
@@ -50,7 +58,7 @@ const NotificationManagement = () => {
     const handleSort = (sortedArray) => {
         setNotifications(sortedArray);
     };
-    const deleteNotification = async () => {
+    const deleteNotificationData = async () => {
         try {
             const response = await deleteNotification(selectedNotification.id);
             if (response === 204) {
@@ -67,10 +75,11 @@ const NotificationManagement = () => {
     useEffect(() => {
         const fetchAllNotifications = async () => {
             try {
-                const response = await getAllNotification();
+                const response = await getAllNotification(page, size);
                 console.log("rev notifications", response);
                 if (response) {
-                    setNotifications(response);
+                    setNotifications(response.content);
+                    setTotalPages(response.totalPages);
                     setLoading(true);
                 }
             } catch (error) {
@@ -78,7 +87,7 @@ const NotificationManagement = () => {
             }
         }
         fetchAllNotifications();
-    }, [loading])
+    }, [loading,page])
     return (<>
         <div className="container-xl">
             <div className="table-responsive">
@@ -130,15 +139,7 @@ const NotificationManagement = () => {
                                     >
                                         <i className="material-icons">&#xE147;</i> <span>Send</span>
                                     </button>
-                                    <button
-                                        onClick={() => openDeleteModal()}
-                                        type="button"
-                                        class="btn btn-danger btn-sm"
-                                        style={{ marginLeft: "10px" }}
-                                    >
-                                        <i className="material-icons">&#xE15C;</i>{" "}
-                                        <span>Delete</span>
-                                    </button>
+                            
                                 </div>
                             </div>
                         </div>
@@ -154,6 +155,7 @@ const NotificationManagement = () => {
                         tableName={"notification"}
                     />
                 </div>
+                {totalPages > 0 ? (<Paging handlePage={handlePage} totalPages={totalPages} selectedPage={page} />) : (<p>Loading...</p>)}
             </div>
         </div>
       {showDetailModal && (
@@ -171,7 +173,6 @@ const NotificationManagement = () => {
               <table class="table table-bordered modalDetail">
                 <thead>
                   <tr>
-                    {/* <th>ID</th> */}
                     <th>No</th>
                     <th>title</th>
                     <th>content</th>
@@ -209,14 +210,15 @@ const NotificationManagement = () => {
         </div>
       )}
                                     
-        {/* {showDeleteModal && (
+        {showDeleteModal && (
             <Delete
                 closeDeleteModal={closeDeleteModal}
-                selectedProduct={selectedDiscount}
-                handleDeleteproduct={deleteDiscount}
-                table={"discount"}
+                selectedProduct={selectedNotification}
+                handleDeleteproduct={deleteNotificationData}
+                table={"notification"}
+                fullScreen={fullScreen}
             />
-        )} */}
+        )}
         {
             showNotificationSend && (
                 <Dialog
@@ -231,6 +233,7 @@ const NotificationManagement = () => {
                 </Dialog>
             )
         }
+         
     </>);
 }
 

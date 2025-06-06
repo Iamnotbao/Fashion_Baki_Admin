@@ -13,7 +13,7 @@ const Delete = ({ closeDeleteModal, selectedProduct, handleDeleteproduct, table,
                 <div class="modal-content">
                     <div class="modal-header" style={{ display: "flex", justifyContent: "space-between" }}>
                         <h5 class="modal-title" id="exampleModalCenterTitle">
-                            {action === "enable" ? ("Enable") : action === "disable" ? ("Disable") : ("Delete")} Option
+                            {action === "enable" ? ("Enable") : action === "disable" ? ("Disable") : ("Delete")} 
                         </h5>
                         <button
                             type="button"
@@ -32,7 +32,7 @@ const Delete = ({ closeDeleteModal, selectedProduct, handleDeleteproduct, table,
                                 {table === "staff" ?
                                     (
                                         <b>{selectedProduct.fullName}</b>
-                                    ) : table === "user" ? (<b>{selectedProduct.fullName}</b>) : table === "stock" ? (<b>{selectedProduct.id}</b>) 
+                                    ) : table === "user" ? (<b>{selectedProduct.fullName}</b>):table==="notification" ? (<><span>the title </span><b>{selectedProduct.title}</b> </>) : table === "stock" ? (<b>{selectedProduct.id}</b>)
                                     : table === "discount" ? (<><span>code </span><b>{selectedProduct.code}</b></>):
                                         (<span>
                                             <b>{selectedProduct.name}</b>

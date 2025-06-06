@@ -411,10 +411,7 @@ const ProductManagement = () => {
                       required
                     />
                   </div>
-                  {/* <div className="form-group">
-                    <label htmlFor="sale">Sale</label>
-                    <Switch value={checkStatus} name="sale" onChange={handleChangeStaus}/>
-                  </div> */}
+             
                   <div className="form-group">
                     <label htmlFor="rating">Rating</label>
                     <input
@@ -425,16 +422,7 @@ const ProductManagement = () => {
                       required
                     />
                   </div>
-                  {/* <div className="form-group">
-                    <label htmlFor="stockQuantity">Stock Quantity</label>
-                    <input
-                      type="text"
-                      name="stockQuantity"
-                      className="form-control"
-                      id="stockQuantity"
-                      required
-                    />
-                  </div> */}
+                  
                   <div className="form-group">
                     <label htmlFor="brandId">Brand</label>
                     {brand && (
@@ -540,7 +528,7 @@ const ProductManagement = () => {
                         ))}
                     </div>
                   </div>
-                  {/* colorIds:e.target.colorIds.value */}
+                 
                   <div
                     className="d-flex justify-content-between"
                     style={{ marginTop: "20px" }}
@@ -578,12 +566,11 @@ const ProductManagement = () => {
                 className="modalDetail table table-bordered "
               >
                 <tr>
-                  {/* <th>ID</th> */}
+                 
                   <th>Image</th>
                   <th>Name</th>
                   <th>Price</th>
                   <th>Rating</th>
-                  {/* <th>Sale</th> */}
                   <th>Stock</th>
                   <th>Category</th>
                   <th>Subcategory</th>
@@ -605,7 +592,6 @@ const ProductManagement = () => {
                   </td>
                   <td>{selectedProduct.price}</td>
                   <td>{selectedProduct.rating}</td>
-                  {/* <td><img src={<Check/>} alt="" style={{ maxWidth: "100%", height: "100%", borderRadius: "50%" }} /></td> */}
                   <td>{selectedProduct.stockQuantity}</td>
                   <td>{category && category.map((cat) => {
                     if (cat.id === selectedProduct.categoryId) {
@@ -703,7 +689,7 @@ const ProductManagement = () => {
                       style={{ display: 'none' }}
                       ref={fileInputRef}
                     />
-                    {/* Image preview */}
+                  
                     {selectedProduct.image && (
                       <div style={{ width: "80px", marginTop: "10px" }}>
                         <img
@@ -725,17 +711,7 @@ const ProductManagement = () => {
                       required
                     />
                   </div>
-                  {/* <div className="form-group">
-                    <label htmlFor="sale">Sale</label>
-                    <input
-                      type="text"
-                      name="sale"
-                      className="form-control"
-                      id="sale"
-                      defaultValue={selectedProduct.sale}
-                      required
-                    />
-                  </div> */}
+          
                   <div className="form-group">
                     <label htmlFor="rating">Rating</label>
                     <input
@@ -833,20 +809,7 @@ const ProductManagement = () => {
                           });
                         }}
                       >
-                        {/* {subcategories.map((item, index) => {
-                          if (item.id === selectedProduct.categoryId) {
-                            return (
-                              <option key={index} value={item.id}>
-                                {item.name}
-                              </option>
-                            );
-                          }
-                          return (
-                            <option key={index} value={item.id}>
-                              {item.name}
-                            </option>
-                          );
-                        })} */}
+                        
                         {subcategories
                           .filter(
                             (item) =>

@@ -36,17 +36,31 @@ export const sendNotification = (payload) => {
     }
 }
 
-export const getAllNotification = async () => {
+export const getAllNotification = async (page,size) => {
     try {
-        const response = await axios.get(API_BASE_URL, {
+        const response = await axios.get(`${API_BASE_URL}?page=${page}&size=${size}`, {
             headers: {
                 'Content-Type': 'application/json',
             },
             withCredentials: true,
         });
-        return response.data ? response.data.content : [];
+        return response.data ? response.data : [];
     } catch (error) {
         console.error("Error fetching notifications:", error);
+        throw error;
+    }
+}
+export const deleteNotification = async (id) => {
+    try {
+        const response = await axios.delete(`${API_BASE_URL}/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        });
+        return response.status;
+    } catch (error) {
+        console.error("Error deleting notification:", error);
         throw error;
     }
 }
