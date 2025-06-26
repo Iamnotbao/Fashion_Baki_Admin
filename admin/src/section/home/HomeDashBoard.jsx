@@ -28,7 +28,7 @@ const HomeDashBoard = () => {
     const [discountedPrice, setDiscountedPrice] = useState(0);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    
+
 
     const username = 'admin';
     const password = 'admin123';
@@ -36,10 +36,10 @@ const HomeDashBoard = () => {
 
     const api_url = import.meta.env.VITE_API_URL;
     const webSocket = import.meta.env.VITE_WEBSOCKET_URL;
-    
+
     const url = new URL(api_url);
     url.pathname = webSocket;
-    
+
     // useEffect(() => {
     //     const socket = new SockJS(webSocket);
     //     const client = new Client({
@@ -53,7 +53,7 @@ const HomeDashBoard = () => {
     //       heartbeatIncoming: 4000,
     //       heartbeatOutgoing: 4000,
     //     });
-    
+
     //     client.onConnect = () => {
     //       console.log('Connected to WebSocket');
     //       client.subscribe(`${api_url}/discount-codes`, (message) => {
@@ -64,15 +64,15 @@ const HomeDashBoard = () => {
     //         setError('');
     //       });
     //     };
-    
+
     //     client.onStompError = (frame) => {
     //       console.error('STOMP error:', frame);
     //       setError('WebSocket connection failed');
     //     };
-    
+
     //     client.activate();
     //     setStompClient(client);
-    
+
     //     return () => {
     //       if (client) {
     //         client.deactivate();
@@ -90,7 +90,7 @@ const HomeDashBoard = () => {
             setLoading(true);
         }
     }
-    const fetchReportStats= async () => {
+    const fetchReportStats = async () => {
         const result = await reportStats();
         if (result) {
             setStats(result);
@@ -102,13 +102,13 @@ const HomeDashBoard = () => {
             setdataByDate(result);
             setLoading(true);
         }
-  
+
     }
     const fetchExportReport = async () => {
         try {
             setIsExporting(true);
             const result = await exportReport();
-          
+
         } catch (error) {
             console.error("Export failed:", error);
 
@@ -118,7 +118,7 @@ const HomeDashBoard = () => {
     };
     useEffect(() => {
         fetchReportByMonth();
-        fetchReportStats();                                                                  
+        fetchReportStats();
     }, [])
     useEffect(() => {
         if (month && year) {
@@ -164,11 +164,11 @@ const HomeDashBoard = () => {
                                                 <div className="card h-100">
                                                     <div className="card-body">
                                                         <div className="card-title d-flex align-items-start justify-content-between mb-4">
-                                                            <div className="avatar flex-shrink-0">
+                                                            <div className="payments">
                                                                 <img
                                                                     src={ChartSucess}
                                                                     alt="chart success"
-                                                                    className="rounded" />
+                                                                    className="payment-method" />
                                                             </div>
                                                             <div className="dropdown">
                                                                 <button
@@ -187,8 +187,8 @@ const HomeDashBoard = () => {
                                                             </div>
                                                         </div>
                                                         <p className="mb-1">Total Revenue</p>
-                                                        <h4 className="card-title mb-3">${stats?.TotalRevenue?.thisMonthRevenue&&(stats.TotalRevenue.thisMonthRevenue)}</h4>
-                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.TotalRevenue?.percentChange&&(stats.TotalRevenue.percentChange)}%</small>
+                                                        <h4 className="card-title mb-3">${stats?.TotalRevenue?.thisMonthRevenue && (stats.TotalRevenue.thisMonthRevenue)}</h4>
+                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.TotalRevenue?.percentChange && (stats.TotalRevenue.percentChange)}%</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,12 +196,12 @@ const HomeDashBoard = () => {
                                                 <div className="card h-100">
                                                     <div className="card-body">
                                                         <div className="card-title d-flex align-items-start justify-content-between mb-4">
-                                                            <div className="avatar flex-shrink-0">
-                                                                <img
-                                                                    src={Wallet}
-                                                                    alt="wallet info"
-                                                                    className="rounded" />
-                                                            </div>
+                                                                <div className="payments">
+                                                                    <img
+                                                                        src={Wallet}
+                                                                        alt="wallet info"
+                                                                        className="payment-method" />
+                                                                </div>
                                                             <div className="dropdown">
                                                                 <button
                                                                     className="btn p-0"
@@ -219,8 +219,8 @@ const HomeDashBoard = () => {
                                                             </div>
                                                         </div>
                                                         <p className="mb-1">Sales</p>
-                                                        <h4 className="card-title mb-3">${stats?.TotalQuantitySold?.thisMonthQuantity&&(stats.TotalQuantitySold.thisMonthQuantity)}</h4>
-                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.TotalQuantitySold?.percentChange&&(stats.TotalQuantitySold.percentChange)}%</small>
+                                                        <h4 className="card-title mb-3">${stats?.TotalQuantitySold?.thisMonthQuantity && (stats.TotalQuantitySold.thisMonthQuantity)}</h4>
+                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.TotalQuantitySold?.percentChange && (stats.TotalQuantitySold.percentChange)}%</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -313,8 +313,8 @@ const HomeDashBoard = () => {
                                                             </div>
                                                         </div>
                                                         <p className="mb-1">Payments</p>
-                                                        <h4 className="card-title mb-3">${stats?.MOMO?.thisMonthRevenue&&(stats.MOMO.thisMonthRevenue)}</h4>
-                                                        <small className="text-danger fw-medium"><i className="bx bx-down-arrow-alt"></i> {stats?.MOMO?.percentChange&&(stats.MOMO.percentChange.toFixed(2))}%</small>
+                                                        <h4 className="card-title mb-3">${stats?.MOMO?.thisMonthRevenue && (stats.MOMO.thisMonthRevenue)}</h4>
+                                                        <small className="text-danger fw-medium"><i className="bx bx-down-arrow-alt"></i> {stats?.MOMO?.percentChange && (stats.MOMO.percentChange.toFixed(2))}%</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,8 +342,8 @@ const HomeDashBoard = () => {
                                                             </div>
                                                         </div>
                                                         <p className="mb-1">Transactions</p>
-                                                        <h4 className="card-title mb-3">${stats?.COD?.thisMonthRevenue&&(stats.COD.thisMonthRevenue)}</h4>
-                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.COD?.percentChange&&(stats.COD.percentChange)}%</small>
+                                                        <h4 className="card-title mb-3">${stats?.COD?.thisMonthRevenue && (stats.COD.thisMonthRevenue)}</h4>
+                                                        <small className="text-success fw-medium"><i className="bx bx-up-arrow-alt"></i> {stats?.COD?.percentChange && (stats.COD.percentChange)}%</small>
                                                     </div>
                                                 </div>
                                             </div>
