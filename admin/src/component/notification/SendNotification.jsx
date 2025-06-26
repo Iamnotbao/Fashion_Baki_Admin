@@ -16,7 +16,7 @@ import {
     TextField,
     InputLabel
 } from "@mui/material";
-const SendNotification = () => {
+const SendNotification = ({setIsSend}) => {
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         connectWebSocket('4', (notification) => {
@@ -45,11 +45,14 @@ const SendNotification = () => {
                 content: content,
             })
             toast.success(`The notification has been sent to ${userId}.`);
+          
         } catch (error) {
             console.error("Error sending discount code:", error);
             toast.error("Failed to send discount code. Please try again.");
         } finally {
             setLoading(false);
+            setIsSend(false);
+           
         }
     };
 

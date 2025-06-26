@@ -22,7 +22,7 @@ const NotificationManagement = () => {
     const [size, setSize] = useState(8);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    console.log("notifications", totalPages);
+
 
     const notificationColumns = [
         { key: "id", label: "No." },
@@ -228,7 +228,7 @@ const NotificationManagement = () => {
                     aria-labelledby="responsive-dialog-title"
                 >
                     <DialogContent>
-                        <SendNotification/>
+                        <SendNotification setIsSend={setLoading}/>
                     </DialogContent>
                 </Dialog>
             )
