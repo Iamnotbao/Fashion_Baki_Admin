@@ -18,22 +18,18 @@ const Add = ({ onProductAdded }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${url}/service/products`);
-      console.log("check product", response.data);
       setProducts(response.data);
     };
     const fetchBrand = async () => {
       const response = await axios.get(`${url}/service/brands`);
-      console.log("check brand", response.data);
       setBrand(response.data);
     };
     const fetchCategory = async () => {
       const response = await axios.get(`${url}/service/categories`);
-      console.log("check category", response.data);
       setCategory(response.data);
     };
     const fetchSub = async () => {
       const response = await axios.get(`${url}/service/subcategories`);
-      console.log("check sub", response.data);
       setSubcategories(response.data);
     };
     fetchData();
@@ -67,7 +63,6 @@ const Add = ({ onProductAdded }) => {
       formData.append("file", file);
     }
 
-    console.log(newproduct);
 
     try {
       const response = await axios.post(`${url}/service/products`, formData, {
@@ -75,7 +70,6 @@ const Add = ({ onProductAdded }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
       if (response.data) {
         toast.success("Product is added successfully!");
         onProductAdded(response.data);

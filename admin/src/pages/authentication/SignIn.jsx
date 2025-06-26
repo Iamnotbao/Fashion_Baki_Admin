@@ -17,7 +17,7 @@ const Login = () => {
       usernameOrEmail: usernameOrEmail,
       password: password
     }
-    console.log(data);
+   
 
     try {
       const response = await axios.post(baseURL, data,{

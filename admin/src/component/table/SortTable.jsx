@@ -34,7 +34,7 @@ const SortTable = ({
   const [productStatus, setProductStatus] = useState({});
 
   const tableNeedSwitch = ["user", "user_disable"];
-  console.log("gg", productByStock);
+  
 
   const url = import.meta.env.VITE_API_URL;
 
@@ -43,7 +43,7 @@ const SortTable = ({
   useEffect(() => {
     const fetchCategory = async () => {
       const response = await axios.get(`${url}/service/categories`);
-      console.log('category', response.data);
+     
       setCategory(response.data);
     };
     fetchCategory();

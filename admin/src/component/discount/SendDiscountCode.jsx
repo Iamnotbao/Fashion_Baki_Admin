@@ -40,7 +40,6 @@ const SendDiscountCode = ({ selectedDiscount = {} }) => {
 
     useEffect(() => {
         connectDiscountSocket('1', (notification) => {
-            console.log("Notification received:", notification);
             toast.info(notification.title);
         });
 

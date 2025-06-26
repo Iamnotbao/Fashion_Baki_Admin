@@ -76,7 +76,7 @@ const NotificationManagement = () => {
         const fetchAllNotifications = async () => {
             try {
                 const response = await getAllNotification(page, size);
-                console.log("rev notifications", response);
+               
                 if (response) {
                     setNotifications(response.content);
                     setTotalPages(response.totalPages);

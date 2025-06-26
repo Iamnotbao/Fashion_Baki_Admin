@@ -86,7 +86,6 @@ export default function OrderDetail({ productId, open, selectedStock = {}, setLo
     const [update, setUpdate] = React.useState(false);
     const [id, setId] = React.useState({});
     const [selected, setSelected] = React.useState({});
-    console.log("pass", tableName);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -95,7 +94,6 @@ export default function OrderDetail({ productId, open, selectedStock = {}, setLo
     };
     const handleID = (item) => {
         if(tableName=== "stock"){
-            console.log("bbb", id);
             setSelected(item)
             setId(item.id);
         }
@@ -110,7 +108,6 @@ export default function OrderDetail({ productId, open, selectedStock = {}, setLo
     const DeleteStock = async () => {
         if (tableName === "stock") {
             const response = await deleteStock(id);
-            console.log("delete", response);
             if (response.status === 204) {
                 handleDelete();
                 setLoading(false);
@@ -118,17 +115,13 @@ export default function OrderDetail({ productId, open, selectedStock = {}, setLo
             }
         }
         else {
-            console.log("chong",productId+"-"+id);
             const response = await deleteReview(productId, id);
-            console.log("delete", response);
-            if (response.status === 204) {
+            if (response.success) {
                 handleDelete();
                 setLoading(false);
                 setUpdate(false);
             }
         }
-
-        return response;
     }
     React.useEffect(() => {
         if (tableName === "stock" && !update) {

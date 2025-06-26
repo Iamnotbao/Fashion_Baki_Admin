@@ -17,7 +17,6 @@ const BrandManagement = () => {
   const [listUser, setListUser] = useState([]);
   const [file, setFile] = useState(null);
   const url = import.meta.env.VITE_API_URL;
-  console.log("opoppo", selectedBrand);
   let formData = new FormData();
 
   const handleSort = (sortedArray) => {
@@ -60,7 +59,6 @@ const BrandManagement = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${url}/service/brands`);
-      console.log("check", response.data);
       setIsUpdate(false);
       setBrand(response.data);
     };
@@ -72,7 +70,7 @@ const BrandManagement = () => {
       const response = await axios.get(
         `${url}/service/brands/${selectedBrand.id}`
       );
-      console.log("Here", response.data);
+     
     } catch (error) {
       console.error("Error fetching brand data:", error);
     }
@@ -100,7 +98,7 @@ const BrandManagement = () => {
       name: e.target.name.value,
       logo: e.target.logo.value,
     };
-    console.log(newbrand);
+    
     const brand = new Blob([JSON.stringify(newbrand)], {
       type: "application/json",
     });
@@ -116,7 +114,7 @@ const BrandManagement = () => {
         },
       });
       if (response.data) {
-        console.log("res", response.data);
+       
         toast.success("Brand added successfully!");
         closeAddModal();
         setIsUpdate(true);
@@ -139,7 +137,7 @@ const BrandManagement = () => {
       ...selectedBrand,
       name: e.target.name.value,
     };
-    console.log("check update ", selectedBrand);
+    
     const editBrand = new Blob([JSON.stringify(updatebrand)], {
       type: "application/json",
     });
@@ -153,7 +151,7 @@ const BrandManagement = () => {
         formData
       );
       if (response.data) {
-        console.log("return", response.data);
+     
 
         closeEditModal();
 
@@ -167,7 +165,7 @@ const BrandManagement = () => {
         toast.success("Brand edit successfully!");
 
       }
-      console.log("check update", response.data);
+     
 
     } catch (error) {
       console.log(error);
@@ -180,7 +178,7 @@ const BrandManagement = () => {
         `${url}/service/brands/${selectedBrand.id}`
       );
       toast.success("Brand is deleted successfully!");
-      console.log("after delete", response.data);
+      
     } catch (error) {
       console.log(err);
     }

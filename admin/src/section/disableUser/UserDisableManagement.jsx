@@ -16,8 +16,8 @@ const UserDisableManagement = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [listUser, setListUser] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  console.log(selectedUser);
-  console.log("list", listUser);
+
+  
 
   const baseURL = import.meta.env.VITE_API_URL + "/users/disableUsers";
   const url = import.meta.env.VITE_API_URL;
@@ -43,7 +43,7 @@ const UserDisableManagement = () => {
           "Content-Type": "application/json"
         }, withCredentials: true
       });
-      console.log("check", response.data);
+      
       setUsers(response.data);
       setLoading(false);
     };
@@ -74,7 +74,7 @@ const UserDisableManagement = () => {
         },
         withCredentials: true,
       });
-      console.log("Here", response.data);
+      
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -138,7 +138,7 @@ const UserDisableManagement = () => {
       phone: e.target.phone.value,
       address: e.target.address.value,
     };
-    console.log("check update ", selectedUser);
+    
 
     try {
       const response = await axios.put(
@@ -152,7 +152,7 @@ const UserDisableManagement = () => {
       if (response.data) {
         toast.success("User is edited successfully!");
       }
-      console.log("check update", response.data);
+     
       setUsers(
         users.map((emp) =>
           emp.id === selectedUser.id

@@ -9,7 +9,6 @@ const Header = () => {
     const logOutURL = import.meta.env.VITE_API_URL+"/auth/logout"
     const {logout} =  useAuthentication();
     const handleLogout = async () => {
-        console.log("click");
         
         try {
             const response = await axios.post(logOutURL);

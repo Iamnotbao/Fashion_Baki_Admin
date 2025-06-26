@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   
   useEffect(() => {
     const username = localStorage.getItem("username");
-    console.log("username",username);
+    
     if (username) {
       setIsAuthenticated(true);
     }
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     return <div>Loading...</div>;
   }
   const login = (username,role) => {
-    console.log("Logged in as:", username);
     localStorage.setItem("username", username); 
     localStorage.setItem("role", role); 
     setIsAuthenticated(true);

@@ -14,7 +14,7 @@ const OrderManagement = () => {
   const handleSort = (sortedArray) => {
     setOrders(sortedArray);
   };
-  console.log(selectedOrder);
+
 
   const orderColumns = [
     { key: "id", label: "No." },
@@ -47,7 +47,6 @@ const OrderManagement = () => {
     const fetchAllOrder= async()=>{
       try {
         const response = await getAllOrder();
-        console.log("rev data",response);
         if(response){  
           setOrders(response);
           setLoading(true);
@@ -65,7 +64,6 @@ const OrderManagement = () => {
   const handleChangeStatus= async(id,status)=>{
     try {
       const response = await changeOrderStatus(id,status);
-      console.log("change order", response);
       if(response){
         toast.success("STATUS HAS BEEN CHANGED SUCCESSFULLY!") ;
         setLoading(false);

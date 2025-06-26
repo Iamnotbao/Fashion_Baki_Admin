@@ -5,7 +5,7 @@ const baseUrl = import.meta.env.VITE_API_URL+"/report";
 export const reportProductPerDate= async(month,year)=>{
     try 
     {
-      console.log(month," ",year);
+      
       
         const reponse = await axios.get(`${baseUrl}/revenue/daily?year=${year}&month=${month}`,{
             headers: {
@@ -13,7 +13,7 @@ export const reportProductPerDate= async(month,year)=>{
             },withCredentials: true
         });
 
-        console.log("after response: ", reponse.data);
+       
         
         return reponse.data ? reponse.data : ""
     } catch (error) {

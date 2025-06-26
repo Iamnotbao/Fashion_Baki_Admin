@@ -5,13 +5,9 @@ import { useState } from "react";
 
 const EditStock = ({ handleEdit, open, selectedStock,setLoading,setUpdate }) => {
     const [quantity, setQuantity] = useState(1);
-    console.log("watch",selectedStock);
     const hanldeEditStock = async() => {
-        console.log("edit stock", selectedStock, quantity);
         const response = await editStock(selectedStock,quantity);
-        console.log("nhin cc",response);
         if(response===204){
-            console.log("ss");   
             setLoading(false);
             setUpdate(false);
             handleEdit();

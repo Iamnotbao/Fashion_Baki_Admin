@@ -18,7 +18,7 @@ const DiscountManagement = () => {
     const [loading, setLoading] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    console.log("discounts", showDiscountSend);
+    
 
     const discountColumns = [
         { key: "id", label: "No." },
@@ -72,7 +72,7 @@ const DiscountManagement = () => {
             code: e.target.code.value,
             percentage: parseInt(e.target.percentage.value)
         };
-        console.log(newDiscount);
+       
         try {
             const response = await createDiscountCode(newDiscount);
             if (response.data) {
@@ -90,7 +90,7 @@ const DiscountManagement = () => {
             code: e.target.code.value,
             percentage: parseInt(e.target.percentage.value)
         };
-        console.log(updatedDiscount);
+       
         try {
             const response = await updateDiscountCode(selectedDiscount.id, updatedDiscount);
             if (response.data) {
@@ -106,7 +106,7 @@ const DiscountManagement = () => {
         const fetchAllDiscount = async () => {
             try {
                 const response = await getAllDiscountCode();
-                console.log("rev discounts", response);
+                
                 if (response) {
                     setDiscounts(response);
                     setLoading(true);

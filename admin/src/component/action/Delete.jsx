@@ -1,5 +1,4 @@
 const Delete = ({ closeDeleteModal, selectedProduct, handleDeleteproduct, table, action }) => {
-    console.log("ching",selectedProduct);
     
     return (
         <div

@@ -20,7 +20,6 @@ const HomeDashBoard = () => {
     const [stats, setStats] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isExporting, setIsExporting] = useState(false);
-    console.log("baby: ", stats);
 
     const [stompClient, setStompClient] = useState(null);
     const [discountCode, setDiscountCode] = useState('');

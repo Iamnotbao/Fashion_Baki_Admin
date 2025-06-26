@@ -9,7 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL+'/discount-codes';
 
 
 export const createDiscountCode = async (discount) => {
-    console.log("discount code: ", discount);   
+    
     
     try {
         const response = await axios.post(API_BASE_URL, discount,{
@@ -18,7 +18,7 @@ export const createDiscountCode = async (discount) => {
             },
             withCredentials: true,
         });
-        console.log("create discount code response: ", response.data);
+      
         
         return response.data;
     }
@@ -35,7 +35,7 @@ export const getAllDiscountCode = async () => {
             },
             withCredentials: true,
         });
-        console.log("get all discount code response: ", response.data);
+       
         
         return response.data;
     } catch (error) {
@@ -51,7 +51,7 @@ export const updateDiscountCode = async (id, discount) => {
             },
             withCredentials: true,
         });
-        console.log("update discount code response: ", response.data);
+        
         
         return response.data;
     }
@@ -69,7 +69,7 @@ export const deleteDiscountCode = async (id) => {
             },
             withCredentials: true,
         });
-        console.log("delete discount code response: ", response);
+       
         return response.status === 204 ? response.status : "";
     }
     catch (error) {
@@ -86,7 +86,7 @@ export const getDiscountCodeById = async (id) => {
             },
             withCredentials: true,
         });
-        console.log("get discount code by id response: ", response.data);
+       
         
         return response.data;
     }
@@ -103,7 +103,7 @@ export const getDiscountCodeByCode = async (code) => {
             },
             withCredentials: true,
         });
-        console.log("get discount code by code response: ", response.data);
+        
         
         return response.data;
     }   

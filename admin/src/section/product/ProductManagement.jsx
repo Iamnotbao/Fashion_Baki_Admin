@@ -34,7 +34,7 @@ const ProductManagement = () => {
   const [originalFileName, setOriginalFileName] = useState("No file chosen");
   const fileInputRef = useRef(null);
   let formData = new FormData();
-  console.log(selectedFileName);
+
   const url = import.meta.env.VITE_API_URL;
 
 
@@ -174,7 +174,7 @@ const ProductManagement = () => {
       colors: listOfColors
     };
 
-    console.log("newnew", newproduct);
+  
 
 
     const product = new Blob([JSON.stringify(newproduct)], {
@@ -194,7 +194,6 @@ const ProductManagement = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
       if (response.data) {
         toast.success("Product is added successfully!");
       }

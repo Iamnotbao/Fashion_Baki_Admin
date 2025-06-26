@@ -16,7 +16,7 @@ const CategoryManagement = () => {
   const [listUser, setListUser] = useState([]);
    const [isUpdate, setIsUpdate] = useState(false);
    const url = import.meta.env.VITE_API_URL;
-  console.log(selectedCategory);
+ 
 
   const handleSort = (sortedArray) => {
     setCategory(sortedArray);
@@ -47,7 +47,7 @@ const CategoryManagement = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${url}/service/categories`);
-      console.log("check", response.data);
+     
       setIsUpdate(false);
       setCategory(response.data);
     };
@@ -59,7 +59,7 @@ const CategoryManagement = () => {
       const response = await axios.get(
         `${url}/service/categories/${selectedCategory.id}`
       );
-      console.log("Here", response.data);
+     
     } catch (error) {
       console.error("Error fetching category data:", error);
     }
@@ -85,7 +85,7 @@ const CategoryManagement = () => {
     const newcategory = {
       name: e.target.name.value,
     };
-    console.log(newcategory);
+  
 
     try {
       const response = await axios.post(
@@ -109,7 +109,7 @@ const CategoryManagement = () => {
       ...selectedCategory,
       name: e.target.name.value,
     };
-    console.log("check update ", selectedCategory);
+    
 
     try {
       const response = await axios.put(
@@ -119,7 +119,7 @@ const CategoryManagement = () => {
       if (response.data) {
         toast.success("Category is edited successfully!");
       }
-      console.log("check update", response.data);
+     
       setCategory(
         category.map((emp) =>
           emp.id === selectedCategory.id
@@ -144,7 +144,7 @@ const CategoryManagement = () => {
         `${url}/service/categories/${selectedCategory.id}`
       );
       toast.success("Category is deleted successfully!");
-      console.log("after delete", response.data);
+     
     } catch (error) {
       console.log(err);
     }

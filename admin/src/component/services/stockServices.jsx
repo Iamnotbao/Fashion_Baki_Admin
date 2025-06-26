@@ -10,7 +10,7 @@ export const getAllStocks = async () => {
             },
             withCredentials: true,
         });
-        console.log(response);
+       
         return response.status === 200 ? response.data : null;
     } catch (error) {
         console.log(error);
@@ -24,7 +24,7 @@ export const getAllStocksByProduct = async (id) => {
             },
             withCredentials: true,
         });
-        console.log(response);
+       
         return response.status === 200 ? response.data : null;
     } catch (error) {
         console.log(error);
@@ -48,7 +48,7 @@ export const editStock = async(id,quantity) => {
             withCredentials: true,
         });
         if (response) {
-            console.log("update stock",response.status);
+        
             return response.status;
         }
     } catch (error) {
@@ -65,7 +65,7 @@ export const deleteStock = async(id) => {
             withCredentials: true,
         });
         if (response) {
-            console.log("delete stock",response.status);
+            
             return response;
         }
     } catch (error) {

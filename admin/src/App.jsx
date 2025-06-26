@@ -24,7 +24,6 @@ import NotificationManagement from "./section/notification/NotificationManagemen
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuthentication(); 
-  console.log("check",isAuthenticated);
   
 
   return isAuthenticated ? children : <Navigate to="authentication/signIn" />;

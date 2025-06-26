@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 export default function CustomDatePicker({month,year,setYear, setMonth}) {
   const [value, setValue] = useState(null);
-    console.log("date value: ", month, year);
+    
     useEffect(() => {  
         if(value){
             setYear(value?.year())
