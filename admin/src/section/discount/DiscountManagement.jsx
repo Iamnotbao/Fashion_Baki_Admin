@@ -18,7 +18,7 @@ const DiscountManagement = () => {
     const [loading, setLoading] = useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    console.log("discounts", selectedDiscount);
+    console.log("discounts", showDiscountSend);
 
     const discountColumns = [
         { key: "id", label: "No." },
@@ -190,7 +190,7 @@ const DiscountManagement = () => {
                         openDeleteModal={openDeleteModal}
                         tableName={"discount"}
                         openEditModal={openEditModal}
-                        openDiscountSend={openDiscountSend}
+                        openSend={openDiscountSend}
                         closeDiscountSend={closeDiscountSend}
                     />
                 </div>

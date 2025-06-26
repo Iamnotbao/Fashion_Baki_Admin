@@ -64,7 +64,7 @@ const SendDiscountCode = ({ selectedDiscount = {} }) => {
                     userName: 'lethebao',
                 }
             );
-            toast.success(`The discount code ${code} has been sent to ${selectedUsers === "all" ? "all users" : "selected users"}.`);
+            toast.success(`The discount code ${code} has been sent to ${user === "" ? "all users" : `user ${user}`}.`);
         } catch (error) {
             console.error("Error sending discount code:", error);
             toast.error("Failed to send discount code. Please try again.");
